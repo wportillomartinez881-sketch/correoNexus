@@ -11,13 +11,15 @@
   
   <style>
     :root {
-      --color-navy: #0B1F3A;
-      --color-blue: #2563eb;
-      --color-blue-hover: #1d4ed8;
+      --color-navy: #0b1329;
+      --color-blue: #3b82f6;
+      --color-blue-hover: #2563eb;
+      --color-gold: #d4af37;
+      --color-gold-light: #f3e5ab;
       --color-white: #FFFFFF;
       --color-text-dark: #f8fafc;
       --color-text-muted: #94a3b8;
-      --color-border: rgba(255, 255, 255, 0.15);
+      --color-border: rgba(212, 175, 55, 0.2);
       --color-error: #f87171;
       --color-success: #34d399;
       --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -33,7 +35,7 @@
 
     body {
       font-family: var(--font-family);
-      background-color: #05050a;
+      background-color: #05070e;
       color: var(--color-text-dark);
       line-height: 1.6;
       min-height: 100vh;
@@ -42,7 +44,7 @@
       padding: 40px 20px;
     }
 
-    /* Fondo animado corporativo fluido */
+    /* Fondo animado estilo etéreo / nexus azul y dorado */
     .bg-animated {
       position: fixed;
       top: 0;
@@ -50,41 +52,53 @@
       width: 100vw;
       height: 100vh;
       z-index: 0;
-      background: linear-gradient(135deg, #05050a 0%, #0B1F3A 100%);
+      background: radial-gradient(circle at 50% 30%, #0d1b3e 0%, #05070e 70%);
       overflow: hidden;
       pointer-events: none;
     }
 
     .blob {
       position: absolute;
-      filter: blur(80px);
-      opacity: 0.45;
-      animation: floatBlob 15s infinite alternate ease-in-out;
+      filter: blur(90px);
+      opacity: 0.4;
+      animation: floatBlob 16s infinite alternate ease-in-out;
     }
 
     .blob-1 {
       top: -10%;
-      left: -10%;
+      left: 10%;
       width: 50vw;
       height: 50vw;
-      background-color: #2563eb;
+      background-color: #1d4ed8; /* Azul Nexus */
       border-radius: 50%;
     }
 
     .blob-2 {
-      bottom: -10%;
-      right: -10%;
+      bottom: -15%;
+      right: 10%;
       width: 55vw;
       height: 55vw;
-      background-color: #5227FF;
+      background-color: #b8860b; /* Dorado elegante */
       border-radius: 50%;
       animation-delay: -5s;
+      opacity: 0.25;
+    }
+
+    .blob-3 {
+      top: 40%;
+      left: 30%;
+      width: 40vw;
+      height: 40vw;
+      background-color: #3b82f6;
+      border-radius: 50%;
+      animation-delay: -10s;
+      opacity: 0.2;
     }
 
     @keyframes floatBlob {
       0% { transform: translate(0px, 0px) scale(1); }
-      50% { transform: translate(30px, 50px) scale(1.1); }
-      100% { transform: translate(-20px, -30px) scale(0.95); }
+      50% { transform: translate(40px, 60px) scale(1.1); }
+      100% { transform: translate(-30px, -40px) scale(0.95); }
     }
 
     .contact-container {
@@ -105,7 +119,10 @@
       margin-bottom: 12px;
       font-weight: 700;
       letter-spacing: -0.5px;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      background: linear-gradient(135deg, #ffffff 30%, #f3e5ab 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .contact-header p {
@@ -130,15 +147,62 @@
       }
     }
 
-    /* Tarjetas con estilo Glassmorphism Oscuro */
+    /* Tarjetas con estilo Glassmorphism Oscuro y Borde Interactivo Dinámico */
     .card, .info-card {
-      background: rgba(11, 31, 58, 0.75);
+      background: rgba(11, 19, 41, 0.8);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-radius: var(--radius);
       padding: 40px;
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Efecto de brillo de borde al acercar el cursor (Spotlight / Mouse tracking glow) */
+    .card::before, .info-card::before {
+      content: '';
+      position: absolute;
+      top: var(--y, 0px);
+      left: var(--x, 0px);
+      transform: translate(-50%, -50%);
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(59, 130, 246, 0.15) 50%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .card:hover::before, .info-card:hover::before {
+      opacity: 1;
+    }
+
+    .card::after, .info-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius);
+      padding: 1.5px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.4), rgba(59, 130, 246, 0.4));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.3;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .card:hover::after, .info-card:hover::after {
+      opacity: 0.9;
+    }
+
+    .card > *, .info-card > * {
+      position: relative;
+      z-index: 2;
     }
 
     .form-group-row {
@@ -163,7 +227,7 @@
     .form-group label {
       font-size: 0.875rem;
       font-weight: 600;
-      color: #cbd5e1;
+      color: #e2e8f0;
       margin-bottom: 8px;
     }
 
@@ -173,17 +237,17 @@
       font-size: 1rem;
       font-family: inherit;
       color: var(--color-white);
-      background-color: rgba(15, 23, 42, 0.6);
-      border: 1.5px solid var(--color-border);
+      background-color: rgba(10, 15, 30, 0.7);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
       border-radius: 8px;
       outline: none;
       transition: var(--transition);
     }
 
     .form-control:focus {
-      border-color: var(--color-blue);
-      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25);
-      background-color: rgba(15, 23, 42, 0.9);
+      border-color: var(--color-gold);
+      box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
+      background-color: rgba(10, 15, 30, 0.95);
     }
 
     .form-control::placeholder {
@@ -210,11 +274,11 @@
       display: block;
     }
 
-    /* Botón de envío */
+    /* Botón de envío con toque dorado y azul */
     .btn-submit {
       width: 100%;
       padding: 14px 28px;
-      background-color: var(--color-blue);
+      background: linear-gradient(135deg, #2563eb 0%, #d4af37 100%);
       color: var(--color-white);
       border: none;
       border-radius: 8px;
@@ -226,13 +290,13 @@
       justify-content: center;
       gap: 10px;
       transition: var(--transition);
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.35);
     }
 
     .btn-submit:hover:not(:disabled) {
-      background-color: var(--color-blue-hover);
+      filter: brightness(1.1);
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.6);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
     }
 
     .btn-submit:disabled {
@@ -266,14 +330,14 @@
     }
 
     .alert-success {
-      background-color: rgba(6, 95, 70, 0.8);
+      background-color: rgba(6, 95, 70, 0.85);
       color: #6ee7b7;
       border: 1px solid rgba(167, 243, 208, 0.3);
       backdrop-filter: blur(8px);
     }
 
     .alert-error {
-      background-color: rgba(153, 27, 27, 0.8);
+      background-color: rgba(153, 27, 27, 0.85);
       color: #fca5a5;
       border: 1px solid rgba(252, 165, 165, 0.3);
       backdrop-filter: blur(8px);
@@ -284,6 +348,8 @@
       font-size: 1.5rem;
       margin-bottom: 24px;
       color: var(--color-white);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding-bottom: 12px;
     }
 
     .info-item {
@@ -299,21 +365,21 @@
     .info-icon {
       width: 44px;
       height: 44px;
-      background-color: rgba(37, 99, 235, 0.2);
+      background: rgba(212, 175, 55, 0.1);
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      color: #60a5fa;
-      border: 1px solid rgba(37, 99, 235, 0.3);
+      color: var(--color-gold);
+      border: 1px solid rgba(212, 175, 55, 0.3);
     }
 
     .info-content h3 {
       font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--color-text-muted);
+      color: var(--color-gold-light);
       margin-bottom: 4px;
     }
 
@@ -325,16 +391,17 @@
     }
 
     .info-content a:hover {
-      color: #60a5fa;
+      color: var(--color-gold);
     }
   </style>
 </head>
 <body>
 
-  <!-- Fondo animado moderno -->
+  <!-- Fondo animado etéreo en tonos Nexus Azul y Dorado -->
   <div class="bg-animated">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
   </div>
 
   <div class="contact-container" style="margin-top: 20px;">
@@ -345,7 +412,7 @@
 
     <div class="contact-grid">
       <!-- FORMULARIO DE CONTACTO -->
-      <div class="card">
+      <div class="card interactive-glow">
         <form id="nexus-contact-form" novalidate>
           <div class="form-group-row">
             <div class="form-group" id="group-nombre">
@@ -407,7 +474,7 @@
       </div>
 
       <!-- TARJETA LATERAL -->
-      <div class="info-card">
+      <div class="info-card interactive-glow">
         <h2>Información Corporativa</h2>
 
         <div class="info-item">
@@ -448,6 +515,19 @@
   <script>
     // Inicializar Iconos Lucide
     lucide.createIcons();
+
+    // ==========================================================================
+    // EFECTO DE LUZ INTERACTIVA EN LOS BORDES (MOUSE TRACKING GLOW)
+    // ==========================================================================
+    document.querySelectorAll('.interactive-glow').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--x', `${x}px`);
+        card.style.setProperty('--y', `${y}px`);
+      });
+    });
 
     // ==========================================================================
     // LÓGICA DE ENVÍO DE EMAILJS Y VALIDACIONES
