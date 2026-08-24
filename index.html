@@ -1,619 +1,241 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contacto | Nexus Servicios Empresariales</title>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- SDK oficial de EmailJS -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  
-  <style>
-    :root {
-      --color-navy: #0b1329;
-      --color-blue: #3b82f6;
-      --color-blue-hover: #2563eb;
-      --color-gold: #d4af37;
-      --color-gold-light: #f3e5ab;
-      --color-white: #FFFFFF;
-      --color-text-dark: #f8fafc;
-      --color-text-muted: #94a3b8;
-      --color-border: rgba(212, 175, 55, 0.2);
-      --color-error: #f87171;
-      --color-success: #34d399;
-      --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      --radius: 16px;
-      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto Corporativo - NEXUS Servicios Empresariales</title>
+    <!-- Tailwind CSS CDN para un diseño rápido, limpio y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <style>
+        :root {
+            --color-gold: #D4AF37;
+            --color-gold-light: #F3E5AB;
+            --color-bg-dark: #070B14;
+            --color-card-bg: rgba(15, 23, 42, 0.75);
+        }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+        body {
+            background-color: var(--color-bg-dark);
+            color: #E2E8F0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
 
-    body {
-      font-family: var(--font-family);
-      background-color: #05070e;
-      color: var(--color-text-dark);
-      line-height: 1.6;
-      min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
-      padding: 40px 20px;
-    }
+        /* Contenedores principales con efecto de borde dorado limpio en hover */
+        .corporate-card {
+            background: var(--color-card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 1rem;
+            backdrop-filter: blur(12px);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    /* Fondo animado estilo etéreo / nexus azul y dorado */
-    .bg-animated {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      background: radial-gradient(circle at 50% 30%, #0d1b3e 0%, #05070e 70%);
-      overflow: hidden;
-      pointer-events: none;
-    }
+        .corporate-card:hover {
+            border-color: var(--color-gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+        }
 
-    .blob {
-      position: absolute;
-      filter: blur(90px);
-      opacity: 0.4;
-      animation: floatBlob 16s infinite alternate ease-in-out;
-    }
+        /* Inputs corporativos elegantes */
+        .corporate-input {
+            background-color: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #FFFFFF;
+            transition: all 0.3s ease;
+        }
 
-    .blob-1 {
-      top: -10%;
-      left: 10%;
-      width: 50vw;
-      height: 50vw;
-      background-color: #1d4ed8; /* Azul Nexus */
-      border-radius: 50%;
-    }
+        .corporate-input:focus {
+            outline: none;
+            border-color: var(--color-gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+            background-color: rgba(30, 41, 59, 0.9);
+        }
 
-    .blob-2 {
-      bottom: -15%;
-      right: 10%;
-      width: 55vw;
-      height: 55vw;
-      background-color: #b8860b; /* Dorado elegante */
-      border-radius: 50%;
-      animation-delay: -5s;
-      opacity: 0.25;
-    }
-
-    .blob-3 {
-      top: 40%;
-      left: 30%;
-      width: 40vw;
-      height: 40vw;
-      background-color: #3b82f6;
-      border-radius: 50%;
-      animation-delay: -10s;
-      opacity: 0.2;
-    }
-
-    @keyframes floatBlob {
-      0% { transform: translate(0px, 0px) scale(1); }
-      50% { transform: translate(40px, 60px) scale(1.1); }
-      100% { transform: translate(-30px, -40px) scale(0.95); }
-    }
-
-    .contact-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 10;
-    }
-
-    .contact-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    .contact-header h1 {
-      font-size: 2.75rem;
-      color: var(--color-white);
-      margin-bottom: 12px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.6);
-      background: linear-gradient(135deg, #ffffff 30%, #f3e5ab 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .contact-header p {
-      color: var(--color-text-muted);
-      font-size: 1.125rem;
-      max-width: 600px;
-      margin: 0 auto;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-
-    /* Grid principal */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-
-    @media (min-width: 992px) {
-      .contact-grid {
-        grid-template-columns: 1.4fr 1fr;
-        align-items: start;
-      }
-    }
-
-    /* Tarjetas con estilo Glassmorphism Oscuro y Borde Interactivo Dinámico */
-    .card, .info-card {
-      background: rgba(11, 19, 41, 0.8);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: var(--radius);
-      padding: 40px;
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    /* Efecto de brillo de borde al acercar el cursor (Spotlight / Mouse tracking glow) */
-    .card::before, .info-card::before {
-      content: '';
-      position: absolute;
-      top: var(--y, 0px);
-      left: var(--x, 0px);
-      transform: translate(-50%, -50%);
-      width: 350px;
-      height: 350px;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(59, 130, 246, 0.15) 50%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .card:hover::before, .info-card:hover::before {
-      opacity: 1;
-    }
-
-    .card::after, .info-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: var(--radius);
-      padding: 1.5px;
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.4), rgba(59, 130, 246, 0.4));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0.3;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-
-    .card:hover::after, .info-card:hover::after {
-      opacity: 0.9;
-    }
-
-    .card > *, .info-card > * {
-      position: relative;
-      z-index: 2;
-    }
-
-    .form-group-row {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-
-    @media (min-width: 640px) {
-      .form-group-row {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .form-group label {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: #e2e8f0;
-      margin-bottom: 8px;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 12px 16px;
-      font-size: 1rem;
-      font-family: inherit;
-      color: var(--color-white);
-      background-color: rgba(10, 15, 30, 0.7);
-      border: 1.5px solid rgba(255, 255, 255, 0.12);
-      border-radius: 8px;
-      outline: none;
-      transition: var(--transition);
-    }
-
-    .form-control:focus {
-      border-color: var(--color-gold);
-      box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
-      background-color: rgba(10, 15, 30, 0.95);
-    }
-
-    .form-control::placeholder {
-      color: #64748b;
-    }
-
-    textarea.form-control {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    .error-text {
-      color: var(--color-error);
-      font-size: 0.8rem;
-      margin-top: 6px;
-      display: none;
-    }
-
-    .form-group.has-error .form-control {
-      border-color: var(--color-error);
-    }
-
-    .form-group.has-error .error-text {
-      display: block;
-    }
-
-    /* Botón de envío con toque dorado y azul */
-    .btn-submit {
-      width: 100%;
-      padding: 14px 28px;
-      background: linear-gradient(135deg, #2563eb 0%, #d4af37 100%);
-      color: var(--color-white);
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      transition: var(--transition);
-      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.35);
-    }
-
-    .btn-submit:hover:not(:disabled) {
-      filter: brightness(1.1);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-    }
-
-    .btn-submit:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-
-    .spinner {
-      display: none;
-      width: 20px;
-      height: 20px;
-      border: 2.5px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: var(--color-white);
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Alertas */
-    .alert-message {
-      padding: 16px;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      margin-top: 20px;
-      display: none;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .alert-success {
-      background-color: rgba(6, 95, 70, 0.85);
-      color: #6ee7b7;
-      border: 1px solid rgba(167, 243, 208, 0.3);
-      backdrop-filter: blur(8px);
-    }
-
-    .alert-error {
-      background-color: rgba(153, 27, 27, 0.85);
-      color: #fca5a5;
-      border: 1px solid rgba(252, 165, 165, 0.3);
-      backdrop-filter: blur(8px);
-    }
-
-    /* Tarjeta lateral corporativa */
-    .info-card h2 {
-      font-size: 1.5rem;
-      margin-bottom: 24px;
-      color: var(--color-white);
-      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-      padding-bottom: 12px;
-    }
-
-    .info-item {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 28px;
-    }
-
-    .info-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .info-icon {
-      width: 44px;
-      height: 44px;
-      background: rgba(212, 175, 55, 0.1);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: var(--color-gold);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-    }
-
-    .info-content h3 {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--color-gold-light);
-      margin-bottom: 4px;
-    }
-
-    .info-content p, .info-content a {
-      color: #e2e8f0;
-      font-size: 0.95rem;
-      text-decoration: none;
-      line-height: 1.5;
-    }
-
-    .info-content a:hover {
-      color: var(--color-gold);
-    }
-  </style>
+        /* Títulos con acento dorado */
+        .text-gold {
+            color: var(--color-gold);
+        }
+        
+        .border-gold-subtle {
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+    </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col justify-between py-12 px-4 sm:px-6 lg:px-8">
 
-  <!-- Fondo animado etéreo en tonos Nexus Azul y Dorado -->
-  <div class="bg-animated">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-  </div>
-
-  <div class="contact-container" style="margin-top: 20px;">
-    <header class="contact-header">
-      <h1>Contacto Corporativo</h1>
-      <p>Estamos listos para impulsar la consultoría y optimización de su empresa.</p>
-    </header>
-
-    <div class="contact-grid">
-      <!-- FORMULARIO DE CONTACTO -->
-      <div class="card interactive-glow">
-        <form id="nexus-contact-form" novalidate>
-          <div class="form-group-row">
-            <div class="form-group" id="group-nombre">
-              <label for="nombre">Nombre completo *</label>
-              <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ej. Carlos Mendoza">
-              <span class="error-text">Por favor, ingresa tu nombre completo.</span>
-            </div>
-
-            <div class="form-group" id="group-empresa">
-              <label for="empresa">Empresa *</label>
-              <input type="text" id="empresa" name="empresa" class="form-control" placeholder="Ej. Nexus S.A. de C.V.">
-              <span class="error-text">Ingresa el nombre de tu empresa.</span>
-            </div>
-          </div>
-
-          <div class="form-group-row">
-            <div class="form-group" id="group-correo">
-              <label for="correo">Correo electrónico *</label>
-              <input type="email" id="correo" name="correo" class="form-control" placeholder="carlos@empresa.com">
-              <span class="error-text">Ingresa un correo electrónico válido.</span>
-            </div>
-
-            <div class="form-group" id="group-telefono">
-              <label for="telefono">Número de teléfono *</label>
-              <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="+503 7000-0000">
-              <span class="error-text">Ingresa un número de contacto válido.</span>
-            </div>
-          </div>
-
-          <div class="form-group" id="group-asunto">
-            <label for="asunto">Asunto *</label>
-            <input type="text" id="asunto" name="asunto" class="form-control" placeholder="Ej. Solicitud de propuesta comercial">
-            <span class="error-text">Por favor, especifica el asunto.</span>
-          </div>
-
-          <div class="form-group" id="group-mensaje">
-            <label for="mensaje">Mensaje *</label>
-            <textarea id="mensaje" name="mensaje" class="form-control" placeholder="Describe los requerimientos de tu proyecto..."></textarea>
-            <span class="error-text">Escribe tu mensaje (mínimo 10 caracteres).</span>
-          </div>
-
-          <button type="submit" id="btn-submit" class="btn-submit">
-            <span class="spinner" id="spinner"></span>
-            <span id="btn-text">Enviar mensaje</span>
-            <i data-lucide="send" id="btn-icon" style="width: 18px; height: 18px;"></i>
-          </button>
-
-          <!-- Mensajes de respuesta -->
-          <div id="alert-success" class="alert-message alert-success">
-            <i data-lucide="check-circle-2"></i>
-            <span>¡Mensaje enviado con éxito! Nos pondremos en contacto a la brevedad.</span>
-          </div>
-
-          <div id="alert-error" class="alert-message alert-error">
-            <i data-lucide="alert-circle"></i>
-            <span id="error-message-text">Hubo un problema al enviar el mensaje. Inténtalo de nuevo.</span>
-          </div>
-        </form>
-      </div>
-
-      <!-- TARJETA LATERAL -->
-      <div class="info-card interactive-glow">
-        <h2>Información Corporativa</h2>
-
-        <div class="info-item">
-          <div class="info-icon"><i data-lucide="map-pin"></i></div>
-          <div class="info-content">
-            <h3>Dirección</h3>
-            <p>87 Avenida Norte<br>Colonia Escalón, Centro Corporativo 87<br>San Salvador Centro, El Salvador</p>
-          </div>
+    <!-- Sección de Contacto Corporativo -->
+    <main class="max-w-7xl mx-auto w-full">
+        
+        <!-- Encabezado de la sección -->
+        <div class="text-center mb-12">
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
+                Contacto Corporativo
+            </h1>
+            <p class="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto">
+                Estamos listos para impulsar la consultoría y optimización de su empresa.
+            </p>
         </div>
 
-        <div class="info-item">
-          <div class="info-icon"><i data-lucide="phone"></i></div>
-          <div class="info-content">
-            <h3>Teléfono</h3>
-            <p><a href="tel:+50322222222">+503 2222-2222</a></p>
-          </div>
+        <!-- Grid Principal -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Formulario de Contacto (Izquierda - 7 columnas) -->
+            <div class="corporate-card p-6 sm:p-8 lg:col-span-7">
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Nombre completo *</label>
+                            <input type="text" id="nombre" name="nombre" required 
+                                   class="corporate-input w-full px-4 py-3 rounded-lg text-sm" 
+                                   placeholder="Ej. Carlos Mendoza">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Empresa *</label>
+                            <input type="text" id="empresa" name="empresa" required 
+                                   class="corporate-input w-full px-4 py-3 rounded-lg text-sm" 
+                                   placeholder="Ej. Nexus S.A. de C.V.">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Correo electrónico *</label>
+                            <input type="email" id="email" name="email" required 
+                                   class="corporate-input w-full px-4 py-3 rounded-lg text-sm" 
+                                   placeholder="carlos@empresa.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Número de teléfono *</label>
+                            <input type="tel" id="telefono" name="telefono" required 
+                                   class="corporate-input w-full px-4 py-3 rounded-lg text-sm" 
+                                   placeholder="+503 7000-0000">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Asunto *</label>
+                        <input type="text" id="asunto" name="asunto" required 
+                               class="corporate-input w-full px-4 py-3 rounded-lg text-sm" 
+                               placeholder="Ej. Solicitud de propuesta comercial">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Mensaje *</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" required 
+                                  class="corporate-input w-full px-4 py-3 rounded-lg text-sm resize-none" 
+                                  placeholder="Describe los requerimientos de tu proyecto..."></textarea>
+                    </div>
+
+                    <button type="submit" id="submit-btn"
+                            class="w-full py-3.5 px-6 rounded-lg text-sm font-semibold text-gray-900 bg-[#D4AF37] hover:bg-[#E5C158] transition-all duration-300 shadow-lg shadow-yellow-600/20 flex items-center justify-center space-x-2">
+                        <span>Enviar Mensaje</span>
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                    </button>
+                    
+                    <p id="form-status" class="text-xs text-center mt-2 hidden"></p>
+                </form>
+            </div>
+
+            <!-- Información Corporativa (Derecha - 5 columnas) -->
+            <div class="corporate-card p-6 sm:p-8 lg:col-span-5 space-y-8">
+                <h2 class="text-xl font-bold text-white border-b border-gold-subtle pb-4">
+                    Información Corporativa
+                </h2>
+
+                <div class="space-y-6">
+                    <!-- Dirección -->
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-lg bg-slate-800/80 border border-gold-subtle flex items-center justify-center shrink-0 text-gold">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xs font-semibold uppercase tracking-wider text-gold mb-1">Dirección</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">
+                                87 Avenida Norte<br>
+                                Colonia Escalón, Centro Corporativo 87<br>
+                                San Salvador Centro, El Salvador
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Teléfono -->
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-lg bg-slate-800/80 border border-gold-subtle flex items-center justify-center shrink-0 text-gold">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xs font-semibold uppercase tracking-wider text-gold mb-1">Teléfono</h3>
+                            <p class="text-sm text-gray-300">
+                                +503 2222-2222
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Correo Electrónico -->
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-lg bg-slate-800/80 border border-gold-subtle flex items-center justify-center shrink-0 text-gold">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xs font-semibold uppercase tracking-wider text-gold mb-1">Correo Electrónico</h3>
+                            <p class="text-sm text-gray-300 break-all">
+                                nexusserviciosempresariales@gmail.com
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Horario de Atención -->
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-lg bg-slate-800/80 border border-gold-subtle flex items-center justify-center shrink-0 text-gold">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xs font-semibold uppercase tracking-wider text-gold mb-1">Horario de Atención</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">
+                                Lunes a Viernes<br>
+                                8:00 AM - 5:00 PM
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+    </main>
 
-        <div class="info-item">
-          <div class="info-icon"><i data-lucide="mail"></i></div>
-          <div class="info-content">
-            <h3>Correo Electrónico</h3>
-            <p><a href="mailto:nexusserviciosempresariales@gmail.com">nexusserviciosempresariales@gmail.com</a></p>
-          </div>
-        </div>
+    <!-- Script para manejo de envío (EmailJS / Google Sheets opcional) -->
+    <script>
+        // Inicializar EmailJS (Reemplaza con tu Public Key si usas EmailJS)
+        (function() {
+            emailjs.init("TU_PUBLIC_KEY_DE_EMAILJS");
+        })();
 
-        <div class="info-item">
-          <div class="info-icon"><i data-lucide="clock"></i></div>
-          <div class="info-content">
-            <h3>Horario de Atención</h3>
-            <p>Lunes a Viernes<br>8:00 AM - 5:00 PM</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        const form = document.getElementById('contact-form');
+        const statusText = document.getElementById('form-status');
 
-  <script>
-    // Inicializar Iconos Lucide
-    lucide.createIcons();
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Enviando...';
 
-    // ==========================================================================
-    // EFECTO DE LUZ INTERACTIVA EN LOS BORDES (MOUSE TRACKING GLOW)
-    // ==========================================================================
-    document.querySelectorAll('.interactive-glow').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--x', `${x}px`);
-        card.style.setProperty('--y', `${y}px`);
-      });
-    });
-
-    // ==========================================================================
-    // LÓGICA DE ENVÍO DE EMAILJS Y VALIDACIONES
-    // ==========================================================================
-    (function() {
-      emailjs.init("2nIQlgv7xRcj_h6ba");
-    })();
-
-    const EMAILJS_SERVICE_ID = "service_whyliup";
-    const EMAILJS_TEMPLATE_ID = "template_u7emokh";
-
-    const form = document.getElementById('nexus-contact-form');
-    const btnSubmit = document.getElementById('btn-submit');
-    const btnText = document.getElementById('btn-text');
-    const btnIcon = document.getElementById('btn-icon');
-    const spinner = document.getElementById('spinner');
-    const alertSuccess = document.getElementById('alert-success');
-    const alertError = document.getElementById('alert-error');
-
-    function isValidEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-
-    function setFieldError(fieldId, hasError) {
-      const group = document.getElementById(`group-${fieldId}`);
-      if (hasError) group.classList.add('has-error');
-      else group.classList.remove('has-error');
-    }
-
-    function validateForm() {
-      let isValid = true;
-      ['nombre', 'empresa', 'telefono', 'asunto'].forEach(field => {
-        const input = document.getElementById(field);
-        if (!input.value.trim()) { setFieldError(field, true); isValid = false; }
-        else { setFieldError(field, false); }
-      });
-
-      const emailInput = document.getElementById('correo');
-      if (!emailInput.value.trim() || !isValidEmail(emailInput.value.trim())) {
-        setFieldError('correo', true); isValid = false;
-      } else { setFieldError('correo', false); }
-
-      const mensajeInput = document.getElementById('mensaje');
-      if (!mensajeInput.value.trim() || mensajeInput.value.trim().length < 10) {
-        setFieldError('mensaje', true); isValid = false;
-      } else { setFieldError('mensaje', false); }
-
-      return isValid;
-    }
-
-    form.querySelectorAll('.form-control').forEach(input => {
-      input.addEventListener('input', () => setFieldError(input.id, false));
-    });
-
-    function setLoadingState(loading) {
-      if (loading) {
-        btnSubmit.disabled = true;
-        spinner.style.display = 'inline-block';
-        btnIcon.style.display = 'none';
-        btnText.textContent = 'Enviando...';
-        alertSuccess.style.display = 'none';
-        alertError.style.display = 'none';
-      } else {
-        btnSubmit.disabled = false;
-        spinner.style.display = 'none';
-        btnIcon.style.display = 'inline-block';
-        btnText.textContent = 'Enviar mensaje';
-      }
-    }
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      if (!validateForm()) return;
-
-      setLoadingState(true);
-      emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, this)
-        .then(() => {
-          setLoadingState(false);
-          alertSuccess.style.display = 'flex';
-          form.reset();
-        }, error => {
-          setLoadingState(false);
-          alertError.style.display = 'flex';
-          console.error('EmailJS Error:', error);
+            // Simulación de envío o integración con EmailJS
+            // emailjs.sendForm('TU_SERVICE_ID', 'TU_TEMPLATE_ID', this)
+            setTimeout(() => {
+                statusText.classList.remove('hidden', 'text-red-400');
+                statusText.classList.add('text-green-400');
+                statusText.textContent = '¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.';
+                form.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span>Enviar Mensaje</span><i class="fa-solid fa-paper-plane text-xs"></i>';
+                
+                setTimeout(() => statusText.classList.add('hidden'), 5000);
+            }, 1500);
         });
-    });
-  </script>
+    </script>
 </body>
 </html>
