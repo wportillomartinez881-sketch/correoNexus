@@ -27,7 +27,7 @@
             min-height: 100vh;
         }
 
-        /* Contenedor del fondo animado (partículas/estrellas sutiles) */
+        /* Contenedor del fondo animado con partículas más brillantes y abundantes */
         .animated-bg {
             position: fixed;
             top: 0;
@@ -41,9 +41,10 @@
 
         .particle {
             position: absolute;
-            background: rgba(212, 175, 55, 0.4);
+            background: #F3E5AB;
             border-radius: 50%;
-            animation: floatParticle 15s infinite linear;
+            box-shadow: 0 0 8px 2px rgba(212, 175, 55, 0.6); /* Brillo intenso dorado */
+            animation: floatParticle 12s infinite linear;
         }
 
         @keyframes floatParticle {
@@ -51,14 +52,14 @@
                 transform: translateY(105vh) translateX(0);
                 opacity: 0;
             }
-            20% {
-                opacity: 0.6;
+            15% {
+                opacity: 0.9;
             }
-            80% {
-                opacity: 0.6;
+            85% {
+                opacity: 0.9;
             }
             100% {
-                transform: translateY(-5vh) translateX(50px);
+                transform: translateY(-5vh) translateX(40px);
                 opacity: 0;
             }
         }
@@ -103,7 +104,7 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between py-12 px-4 sm:px-6 lg:px-8">
 
-    <!-- Fondo Animado de Partículas Doradas -->
+    <!-- Fondo Animado de Partículas Doradas Brillantes -->
     <div class="animated-bg" id="particles-container"></div>
 
     <!-- Sección de Contacto Corporativo -->
@@ -238,26 +239,25 @@
         </div>
     </main>
 
-    <!-- Scripts (Generador de partículas animadas y EmailJS) -->
+    <!-- Scripts (Partículas más densas y brillantes) -->
     <script>
-        // Generador dinámico de partículas flotantes sutiles
         const particlesContainer = document.getElementById('particles-container');
-        const particleCount = 20;
+        const particleCount = 45; // Aumentado para mayor presencia
 
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
             particle.classList.add('particle');
             
-            // Tamaños aleatorios pequeños (entre 2px y 5px)
-            const size = Math.random() * 3 + 2;
+            // Tamaños variados (entre 2px y 6px)
+            const size = Math.random() * 4 + 2;
             particle.style.width = `${size}px`;
             particle.style.height = `${size}px`;
             
-            // Posiciones iniciales aleatorias en horizontal
+            // Posiciones iniciales aleatorias
             particle.style.left = `${Math.random() * 100}vw`;
             
-            // Retrasos y duraciones aleatorias para que se vea natural
-            particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+            // Velocidades variadas y fluidas
+            particle.style.animationDuration = `${Math.random() * 8 + 6}s`;
             particle.style.animationDelay = `${Math.random() * 5}s`;
             
             particlesContainer.appendChild(particle);
