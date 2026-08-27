@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 1. PARTÍCULAS ANIMADAS ---
     const particlesContainer = document.getElementById('particles-container');
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 35; i++) {
         const particle = document.createElement('div');
         particle.classList.add('particle');
         const size = Math.random() * 4 + 2;
@@ -17,10 +17,20 @@ document.addEventListener("DOMContentLoaded", () => {
         particlesContainer.appendChild(particle);
     }
 
-    // --- 2. WHATSAPP ---
-    document.getElementById("btnWhatsApp").addEventListener("click", () => {
-        const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20deseo%20más%20información%20sobre%20los%20servicios%20y%20módulos%20de%20Nexus.`;
-        window.open(waUrl, "_blank");
+    // --- 2. CONTROL DE MODALES (VENTANAS INTERNAS) ---
+    const emailModal = document.getElementById("emailModal");
+    const chatModal = document.getElementById("chatModal");
+
+    document.getElementById("btnOpenEmailModal").addEventListener("click", () => emailModal.classList.remove("hidden"));
+    document.getElementById("btnCloseEmailModal").addEventListener("click", () => emailModal.classList.add("hidden"));
+
+    document.getElementById("btnOpenChatModal").addEventListener("click", () => chatModal.classList.remove("hidden"));
+    document.getElementById("btnCloseChatModal").addEventListener("click", () => chatModal.classList.add("hidden"));
+
+    // Cerrar modal haciendo clic fuera del contenido
+    window.addEventListener("click", (e) => {
+        if (e.target === emailModal) emailModal.classList.add("hidden");
+        if (e.target === chatModal) chatModal.classList.add("hidden");
     });
 
     // --- 3. CALENDARIO DE REUNIONES ---
@@ -168,20 +178,23 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const submitBtn = document.getElementById("submit-email-btn");
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Enviando...';
+        submitBtn.textContent = "Enviando...";
 
         setTimeout(() => {
             statusText.classList.remove("hidden", "text-red-400");
             statusText.classList.add("text-emerald-400");
-            statusText.textContent = "¡Mensaje de correo enviado con éxito! Nos pondremos en contacto pronto.";
+            statusText.textContent = "¡Correo enviado con éxito! Nos pondremos en contacto pronto.";
             contactForm.reset();
             submitBtn.disabled = false;
-            submitBtn.innerHTML = '<span>Enviar Mensaje por Correo</span><i class="fa-solid fa-paper-plane text-xs"></i>';
-            setTimeout(() => statusText.classList.add("hidden"), 5000);
+            submitBtn.textContent = "Enviar Mensaje por Correo";
+            setTimeout(() => {
+                statusText.classList.add("hidden");
+                emailModal.classList.add("hidden");
+            }, 2500);
         }, 1500);
     });
 
-    // --- 5. ASISTENTE VIRTUAL INTERACTIVO ---
+    // --- 5. ASISTENTE VIRTUAL NEXUS (Con la información de precios y servicios integrada) ---
     const chatMessages = document.getElementById("chatMessages");
     const chatForm = document.getElementById("chatForm");
     const chatInput = document.getElementById("chatInput");
@@ -189,15 +202,15 @@ document.addEventListener("DOMContentLoaded", () => {
     function appendMessage(sender, text) {
         const isBot = sender === "bot";
         const div = document.createElement("div");
-        div.classList.add("flex", "items-start", "gap-3");
+        div.classList.add("flex", "items-start", "gap-2");
         if (!isBot) div.classList.add("flex-row-reverse");
 
         div.innerHTML = `
-            <div class="w-8 h-8 rounded-full bg-slate-800 border border-gold-subtle flex items-center justify-center text-gold shrink-0">
-                <i class="fa-solid ${isBot ? 'fa-robot' : 'fa-user'} text-xs"></i>
+            <div class="w-7 h-7 rounded-full bg-slate-800 border border-gold-subtle flex items-center justify-center text-gold shrink-0">
+                <i class="fa-solid ${isBot ? 'fa-robot' : 'fa-user'} text-[10px]"></i>
             </div>
-            <div class="bg-slate-800 p-3 rounded-xl text-gray-200 max-w-lg border border-white/5 text-xs sm:text-sm">
-                ${text}
+            <div class="bg-slate-800 p-2.5 rounded-xl text-gray-200 border border-white/5 text-xs">
+                ${text.replace(/\n/g, '<br>')}
             </div>
         `;
         chatMessages.appendChild(div);
@@ -205,22 +218,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function handleBotResponse(query) {
-        let response = "Entendido. Para gestiones especializadas o contratación de módulos en El Salvador, te invitamos a agendar una reunión o escribirnos mediante el formulario de correo.";
+        let response = "Entendido. Para más detalles sobre nuestros servicios en El Salvador, puedes agendar una reunión o escribirnos mediante el formulario de correo.";
         const q = query.toLowerCase();
 
-        if (q.includes("planilla") || q.includes("unica")) {
-            response = "La Gestión de Planilla Única (Módulo I - $64.24) en Nexus automatiza el cálculo preciso de ISSS, AFP, renta y retenciones según las normativas vigentes en El Salvador.";
-        } else if (q.includes("precio") || q.includes("módulo") || q.includes("tarifa")) {
-            response = "Contamos con 4 módulos oficiales:\n• Módulo I (Planilla Única): $64.24\n• Módulo II (Asesoría Contable): $48.08\n• Módulo III (Gestión Corporativa): $110.27\n• Módulo IV (Consultoría Directa): $52.65";
-        } else if (q.includes("horario") || q.includes("atencion")) {
-            response = "Nuestro horario de atención corporativa es de Lunes a Viernes de 8:00 AM a 5:00 PM.";
-        } else if (q.includes("asesoría") || q.includes("reunion") || q.includes("agendar")) {
-            response = "Puedes seleccionar una fecha y hora directamente en el calendario interactivo que se encuentra en la parte superior de esta página.";
-        } else if (q.includes("whatsapp") || q.includes("contacto directo")) {
-            response = `También puedes escribirnos de forma directa haciendo clic en el botón inferior de WhatsApp o al número +503 7821-0173.`;
+        if (q.includes("qué es nexus") || q.includes("quienes") || q.includes("servicios")) {
+            response = "Nexus Servicios Empresariales, S.A. de C.V. es tu aliado estratégico en gestión empresarial. Ofrecemos soluciones profesionales integrales adaptadas a las normativas vigentes en El Salvador.";
+        } else if (q.includes("precio") || q.includes("módulo") || q.includes("tarifa") || q.includes("cuánto valen")) {
+            response = "Nuestros módulos y tarifas oficiales son:\n• Módulo I (Planilla Única Base): $64.24\n• Módulo II (Asesoría Contable): $48.08\n• Módulo III (Gestión Corporativa): $110.27\n• Módulo IV (Consultoría Directa): $52.65";
+        } else if (q.includes("planilla") || q.includes("isss") || q.includes("afp")) {
+            response = "El Módulo I de Planilla Única ($64.24) consiste en el cálculo automatizado y seguro de ISSS, AFP y retenciones de ley para empresas.";
+        } else if (q.includes("contacto") || q.includes("contactar") || q.includes("whatsapp")) {
+            response = `Puedes comunicarte con nosotros agendando una reunión en el calendario superior, utilizando el formulario de correo o vía WhatsApp al número +503 7821-0173.`;
         }
 
-        setTimeout(() => appendMessage("bot", response), 600);
+        setTimeout(() => appendMessage("bot", response), 500);
     }
 
     chatForm.addEventListener("submit", (e) => {
@@ -234,8 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll(".faq-btn").forEach(btn => {
         btn.addEventListener("click", () => {
-            // Usa el atributo data-question si existe, de lo contrario toma el texto del título principal del botón
-            const question = btn.getAttribute("data-question") || btn.querySelector("div").textContent;
+            const question = btn.textContent.trim();
             appendMessage("user", question);
             handleBotResponse(question);
         });
