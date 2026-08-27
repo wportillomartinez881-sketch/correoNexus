@@ -38,7 +38,7 @@ body {
     100% { transform: translateY(-5vh) translateX(40px); opacity: 0; }
 }
 
-/* Tarjetas con borde dorado limpio en hover */
+/* Tarjetas corporativas */
 .corporate-card {
     background: var(--color-card-bg);
     border: 1px solid rgba(212, 175, 55, 0.25);
