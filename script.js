@@ -1,9 +1,4 @@
-/**
- * CONFIGURACIÓN DE VARIABLES EXTERNAS (INTEGRACIONES)
- */
-const CONTACT_FORM_URL = "AQUI_COLOCARE_LA_URL_DE_TU_REPOSITORIO_DE_CORREO";
-const CHATBOT_URL = "AQUI_COLOCARE_LA_URL_DEL_CHATBOT";
-const WHATSAPP_NUMBER = "50322222222"; // Reemplaza con número real con código de país (ej. 503...)
+const WHATSAPP_NUMBER = "50378210173"; // Tu número configurado
 const GOOGLE_APPS_SCRIPT_URL = "AQUI_GOOGLE_APPS_SCRIPT_URL";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -22,23 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
         particlesContainer.appendChild(particle);
     }
 
-    // --- 2. CONFIGURACIÓN DE ENLACES EXTERNOS ---
-    const btnEmail = document.getElementById("btnEmailContact");
-    if (!CONTACT_FORM_URL.includes("AQUI_")) btnEmail.href = CONTACT_FORM_URL;
-    
-    const btnChat = document.getElementById("btnChatbot");
-    if (!CHATBOT_URL.includes("AQUI_")) btnChat.href = CHATBOT_URL;
-
+    // --- 2. WHATSAPP ---
     document.getElementById("btnWhatsApp").addEventListener("click", () => {
-        if (WHATSAPP_NUMBER.includes("AQUI_") || WHATSAPP_NUMBER === "50322222222") {
-            alert("Por favor, configura un número real en la variable WHATSAPP_NUMBER.");
-        } else {
-            const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20deseo%20más%20información%20sobre%20los%20servicios%20de%20Nexus.`;
-            window.open(waUrl, "_blank");
-        }
+        const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20deseo%20más%20información%20sobre%20los%20servicios%20de%20Nexus.`;
+        window.open(waUrl, "_blank");
     });
 
-    // --- 3. LÓGICA DEL CALENDARIO Y DISPONIBILIDAD ---
+    // --- 3. CALENDARIO DE REUNIONES ---
     let currentDate = new Date();
     let selectedDateObj = null;
     let selectedTimeSlot = null;
@@ -47,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
         "2026-09-02", "2026-09-04", "2026-09-08", "2026-09-10",
         "2026-09-15", "2026-09-18", "2026-09-22", "2026-09-25", "2026-09-29"
     ];
-
     const availableTimes = ["09:00 AM", "10:30 AM", "02:00 PM", "03:30 PM"];
     const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
@@ -135,15 +119,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderCalendar();
 
-    // --- 4. ENVÍO DE FORMULARIO DE REUNIÓN ---
+    // Envío Reunión
     const meetingForm = document.getElementById("meetingForm");
     meetingForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        if (!selectedDateObj || !selectedTimeSlot) {
-            alert("Selecciona fecha y hora.");
-            return;
-        }
-
         const formData = {
             nombre: document.getElementById("fullName").value.trim(),
             empresa: document.getElementById("companyName").value.trim(),
@@ -156,12 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         if (!GOOGLE_APPS_SCRIPT_URL.includes("AQUI_")) {
-            fetch(GOOGLE_APPS_SCRIPT_URL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData)
-            }).catch(err => console.error(err));
+            fetch(GOOGLE_APPS_SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(formData) }).catch(err => console.error(err));
         }
 
         document.getElementById("sumDate").textContent = formData.fecha;
@@ -184,6 +158,82 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("slotsGrid").innerHTML = "";
         document.getElementById("timeHelperText").style.display = "block";
         renderCalendar();
+    });
+
+    // --- 4. FORMULARIO DE CORREO CORPORATIVO ---
+    const contactForm = document.getElementById("contact-form");
+    const statusText = document.getElementById("form-status");
+
+    contactForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById("submit-email-btn");
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Enviando...';
+
+        setTimeout(() => {
+            statusText.classList.remove("hidden", "text-red-400");
+            statusText.classList.add("text-emerald-400");
+            statusText.textContent = "¡Mensaje de correo enviado con éxito! Nos pondremos en contacto pronto.";
+            contactForm.reset();
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>Enviar Mensaje por Correo</span><i class="fa-solid fa-paper-plane text-xs"></i>';
+            setTimeout(() => statusText.classList.add("hidden"), 5000);
+        }, 1500);
+    });
+
+    // --- 5. ASISTENTE VIRTUAL INTERACTIVO ---
+    const chatMessages = document.getElementById("chatMessages");
+    const chatForm = document.getElementById("chatForm");
+    const chatInput = document.getElementById("chatInput");
+
+    function appendMessage(sender, text) {
+        const isBot = sender === "bot";
+        const div = document.createElement("div");
+        div.classList.add("flex", "items-start", "gap-3");
+        if (!isBot) div.classList.add("flex-row-reverse");
+
+        div.innerHTML = `
+            <div class="w-8 h-8 rounded-full bg-slate-800 border border-gold-subtle flex items-center justify-center text-gold shrink-0">
+                <i class="fa-solid ${isBot ? 'fa-robot' : 'fa-user'} text-xs"></i>
+            </div>
+            <div class="bg-slate-800 p-3 rounded-xl text-gray-200 max-w-lg border border-white/5 text-xs sm:text-sm">
+                ${text}
+            </div>
+        `;
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function handleBotResponse(query) {
+        let response = "Entendido. Para gestiones sobre la Planilla Única o asesorías contables especializadas en El Salvador, te invitamos a agendar una reunión o escribirnos mediante el formulario de correo superior.";
+        const q = query.toLowerCase();
+
+        if (q.includes("planilla") || q.includes("unica")) {
+            response = "La Gestión de Planilla Única en Nexus automatiza el cálculo de ISSS, AFP, renta y retenciones según las normativas vigentes en El Salvador.";
+        } else if (q.includes("horario") || q.includes("atencion")) {
+            response = "Nuestro horario de atención corporativa es de Lunes a Viernes de 8:00 AM a 5:00 PM.";
+        } else if (q.includes("asesoría") || q.includes("reunion") || q.includes("agendar")) {
+            response = "Puedes seleccionar una fecha directamente en el calendario interactivo que se encuentra en la parte superior de esta página.";
+        }
+
+        setTimeout(() => appendMessage("bot", response), 600);
+    }
+
+    chatForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const text = chatInput.value.trim();
+        if (!text) return;
+        appendMessage("user", text);
+        chatInput.value = "";
+        handleBotResponse(text);
+    });
+
+    document.querySelectorAll(".faq-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const question = btn.getAttribute("data-question");
+            appendMessage("user", question);
+            handleBotResponse(question);
+        });
     });
 
 });
