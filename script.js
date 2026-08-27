@@ -3,6 +3,13 @@ const GOOGLE_APPS_SCRIPT_URL = "AQUI_GOOGLE_APPS_SCRIPT_URL";
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    // --- 0. CONFIGURACIÓN ENLACE WHATSAPP ---
+    const whatsappBtn = document.getElementById("whatsappBtn");
+    if (whatsappBtn) {
+        const defaultMsg = encodeURIComponent("Hola, me interesa obtener más información sobre los servicios y tarifas de Nexus.");
+        whatsappBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${defaultMsg}`;
+    }
+
     // --- 1. PARTÍCULAS ANIMADAS ---
     const particlesContainer = document.getElementById('particles-container');
     for (let i = 0; i < 35; i++) {
@@ -194,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1500);
     });
 
-    // --- 5. ASISTENTE VIRTUAL NEXUS (Con la información de precios y servicios integrada) ---
+    // --- 5. ASISTENTE VIRTUAL NEXUS (Con información interna de precios y servicios) ---
     const chatMessages = document.getElementById("chatMessages");
     const chatForm = document.getElementById("chatForm");
     const chatInput = document.getElementById("chatInput");
