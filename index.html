@@ -18,7 +18,7 @@
     <!-- Header / Navbar -->
     <header class="max-w-7xl mx-auto w-full mb-10 corporate-card px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 relative z-10">
         <div class="flex items-center space-x-4">
-            <!-- Logo integrado -->
+            <!-- Tu logotipo integrado -->
             <img src="nexuslogosifondo.png" alt="Logo Nexus" class="h-12 w-auto object-contain">
             <div>
                 <h1 class="text-xl font-extrabold tracking-tight text-white">NEXUS</h1>
@@ -42,7 +42,7 @@
             </p>
         </section>
 
-        <!-- SECCIÓN 1: CALENDARIO DE REUNIONES (Directo al ingresar) -->
+        <!-- SECCIÓN 1: CALENDARIO DE REUNIONES -->
         <section class="corporate-card p-6 sm:p-8" id="agendaSection">
             <div class="mb-6 border-b border-gold-subtle pb-4">
                 <h3 class="text-xl font-bold text-white flex items-center gap-2">
@@ -64,9 +64,7 @@
                         <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
                     </div>
 
-                    <div class="grid grid-cols-7 gap-1.5" id="daysGrid">
-                        <!-- Generado por JS -->
-                    </div>
+                    <div class="grid grid-cols-7 gap-1.5" id="daysGrid"></div>
 
                     <div class="flex justify-around mt-5 text-xs text-gray-400 pt-3 border-t border-white/10">
                         <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-emerald-500 rounded-full"></span> Disponible</div>
@@ -77,18 +75,14 @@
 
                 <!-- Selección de Horarios y Formulario -->
                 <div class="lg:col-span-6 flex flex-col justify-between space-y-6">
-                    <!-- Horarios -->
                     <div class="bg-slate-900/60 p-5 rounded-xl border border-white/10">
                         <h4 class="text-sm font-semibold text-white mb-2">Horarios disponibles</h4>
                         <p class="text-xs text-gray-400 mb-4" id="timeHelperText">Selecciona una fecha disponible en el calendario.</p>
-                        <div class="grid grid-cols-2 gap-3" id="slotsGrid">
-                            <!-- Generado por JS -->
-                        </div>
+                        <div class="grid grid-cols-2 gap-3" id="slotsGrid"></div>
                     </div>
 
-                    <!-- Formulario de Reunión (Oculto hasta elegir hora) -->
                     <div class="bg-slate-900/60 p-5 rounded-xl border border-white/10 hidden animate-fade-in" id="requestFormContainer">
-                        <h4 class="text-sm font-semibold text-white mb-3">Datos para la Solicitud</h4>
+                        <h4 class="text-sm font-semibold text-white mb-3">Datos para la Solicitud de Reunión</h4>
                         <form id="meetingForm" class="space-y-4">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
@@ -130,7 +124,7 @@
             </div>
         </section>
 
-        <!-- PANTALLA DE CONFIRMACIÓN DE REUNIÓN (Oculta por defecto) -->
+        <!-- PANTALLA DE CONFIRMACIÓN DE REUNIÓN -->
         <section class="corporate-card p-8 text-center max-w-2xl mx-auto hidden" id="confirmationSection">
             <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl border border-emerald-500/40">
                 <i class="fa-solid fa-circle-check"></i>
@@ -152,44 +146,92 @@
             </button>
         </section>
 
-        <!-- SECCIÓN 2: OTRAS TARJETAS (Correo y Asistente Virtual) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <!-- Tarjeta 2: Contactar por Correo (Enlazada a tu repositorio de formulario) -->
-            <div class="corporate-card p-6 sm:p-8 flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-slate-800/80 border border-gold-subtle flex items-center justify-center text-gold text-xl mb-4">
-                        <i class="fa-solid fa-envelope-open-text"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-2">Contactar por correo</h3>
-                    <p class="text-sm text-gray-400 mb-6 leading-relaxed">
-                        Envíanos tu consulta detallada mediante nuestro formulario corporativo de correo electrónico y nuestro equipo la atenderá a la brevedad.
-                    </p>
-                </div>
-                <a href="AQUI_COLOCARE_LA_URL" id="btnEmailContact" target="_blank" class="w-full py-3 px-4 rounded-lg text-sm font-semibold text-center text-white bg-slate-800 hover:bg-slate-700 border border-gold-subtle transition flex items-center justify-center gap-2">
-                    <span>Ir al formulario de correo</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                </a>
+        <!-- SECCIÓN 2: FORMULARIO DE CORREO CORPORATIVO (Integrado de tu repositorio) -->
+        <section class="corporate-card p-6 sm:p-8" id="emailSection">
+            <div class="mb-6 border-b border-gold-subtle pb-4">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-envelope-open-text text-gold"></i> Contactar por correo electrónico
+                </h3>
+                <p class="text-sm text-gray-400 mt-1">Envíanos tus requerimientos corporativos directamente mediante este formulario.</p>
             </div>
 
-            <!-- Tarjeta 3: Asistente Virtual -->
-            <div class="corporate-card p-6 sm:p-8 flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-slate-800/80 border border-gold-subtle flex items-center justify-center text-gold text-xl mb-4">
-                        <i class="fa-solid fa-robot"></i>
+            <form id="contact-form" class="space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Nombre completo *</label>
+                        <input type="text" id="nombreCorreo" required class="corporate-input w-full px-4 py-3 rounded-lg text-sm" placeholder="Ej. Carlos Mendoza">
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">Asistente virtual</h3>
-                    <p class="text-sm text-gray-400 mb-6 leading-relaxed">
-                        Obtén información inmediata 24/7 sobre nuestros servicios, gestiones de planilla y asesorías mediante el asistente inteligente de Nexus.
-                    </p>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Empresa *</label>
+                        <input type="text" id="empresaCorreo" required class="corporate-input w-full px-4 py-3 rounded-lg text-sm" placeholder="Ej. Nexus S.A. de C.V.">
+                    </div>
                 </div>
-                <a href="AQUI_COLOCARE_LA_URL" id="btnChatbot" target="_blank" class="w-full py-3 px-4 rounded-lg text-sm font-semibold text-center text-white bg-slate-800 hover:bg-slate-700 border border-gold-subtle transition flex items-center justify-center gap-2">
-                    <span>Hablar con el asistente</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                </a>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Correo electrónico *</label>
+                        <input type="email" id="emailCorreo" required class="corporate-input w-full px-4 py-3 rounded-lg text-sm" placeholder="carlos@empresa.com">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Número de teléfono *</label>
+                        <input type="tel" id="telefonoCorreo" required class="corporate-input w-full px-4 py-3 rounded-lg text-sm" placeholder="7000-0000">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Asunto *</label>
+                    <input type="text" id="asuntoCorreo" required class="corporate-input w-full px-4 py-3 rounded-lg text-sm" placeholder="Ej. Solicitud de propuesta comercial">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Mensaje *</label>
+                    <textarea id="mensajeCorreo" rows="4" required class="corporate-input w-full px-4 py-3 rounded-lg text-sm resize-none" placeholder="Describe los requerimientos de tu proyecto..."></textarea>
+                </div>
+
+                <button type="submit" id="submit-email-btn" class="w-full py-3.5 px-6 rounded-lg text-sm font-semibold text-gray-900 bg-[#D4AF37] hover:bg-[#E5C158] transition-all duration-300 shadow-lg flex items-center justify-center space-x-2">
+                    <span>Enviar Mensaje por Correo</span>
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
+                
+                <p id="form-status" class="text-xs text-center mt-2 hidden"></p>
+            </form>
+        </section>
+
+        <!-- SECCIÓN 3: ASISTENTE VIRTUAL INTERACTIVO -->
+        <section class="corporate-card p-6 sm:p-8" id="chatbotSection">
+            <div class="mb-6 border-b border-gold-subtle pb-4 flex justify-between items-center flex-wrap gap-4">
+                <div>
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-robot text-gold"></i> Asistente Virtual Nexus
+                    </h3>
+                    <p class="text-sm text-gray-400 mt-1">Obtén respuestas inmediatas sobre nuestros servicios y Planilla Única.</p>
+                </div>
+                <span class="bg-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full border border-emerald-500/30">En línea 24/7</span>
             </div>
 
-        </div>
+            <div class="bg-slate-900/80 rounded-xl p-4 border border-white/10 h-64 overflow-y-auto space-y-3 mb-4 text-sm" id="chatMessages">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-full bg-slate-800 border border-gold-subtle flex items-center justify-center text-gold shrink-0"><i class="fa-solid fa-robot text-xs"></i></div>
+                    <div class="bg-slate-800 p-3 rounded-xl text-gray-200 max-w-lg border border-white/5">
+                        ¡Hola! Soy el asistente virtual de Nexus Servicios Empresariales, S.A. de C.V. ¿En qué puedo ayudarte hoy? Selecciona una opción rápida o escribe tu consulta:
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opciones rápidas de preguntas frecuentes -->
+            <div class="flex flex-wrap gap-2 mb-4">
+                <button type="button" class="faq-btn text-xs bg-slate-800 hover:bg-slate-700 text-gray-300 px-3 py-1.5 rounded-lg border border-gold-subtle transition" data-question="¿Qué es la Planilla Única?">¿Qué es la Planilla Única?</button>
+                <button type="button" class="faq-btn text-xs bg-slate-800 hover:bg-slate-700 text-gray-300 px-3 py-1.5 rounded-lg border border-gold-subtle transition" data-question="¿Cuáles son los horarios de atención?">¿Cuáles son los horarios?</button>
+                <button type="button" class="faq-btn text-xs bg-slate-800 hover:bg-slate-700 text-gray-300 px-3 py-1.5 rounded-lg border border-gold-subtle transition" data-question="¿Cómo agendo una asesoría?">¿Cómo agendo una asesoría?</button>
+            </div>
+
+            <form id="chatForm" class="flex gap-2">
+                <input type="text" id="chatInput" placeholder="Escribe tu consulta al asistente..." class="corporate-input flex-1 px-4 py-2.5 rounded-lg text-sm">
+                <button type="submit" class="px-5 py-2.5 rounded-lg text-sm font-semibold text-gray-900 bg-[#D4AF37] hover:bg-[#E5C158] transition">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+        </section>
 
         <!-- Banner de WhatsApp -->
         <section class="corporate-card p-6 sm:p-8 flex flex-col sm:flex-row justify-between items-center gap-6 bg-gradient-to-r from-slate-900/90 to-indigo-950/90">
