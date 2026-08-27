@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = "50378210173"; // Tu número configurado
+const WHATSAPP_NUMBER = "50361612756"; // Número actualizado correctamente
 const GOOGLE_APPS_SCRIPT_URL = "AQUI_GOOGLE_APPS_SCRIPT_URL";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1500);
     });
 
-    // --- 5. ASISTENTE VIRTUAL NEXUS (Con información interna de precios y servicios) ---
+    // --- 5. ASISTENTE VIRTUAL NEXUS (WEB) ---
     const chatMessages = document.getElementById("chatMessages");
     const chatForm = document.getElementById("chatForm");
     const chatInput = document.getElementById("chatInput");
@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (q.includes("planilla") || q.includes("isss") || q.includes("afp")) {
             response = "El Módulo I de Planilla Única ($64.24) consiste en el cálculo automatizado y seguro de ISSS, AFP y retenciones de ley para empresas.";
         } else if (q.includes("contacto") || q.includes("contactar") || q.includes("whatsapp")) {
-            response = `Puedes comunicarte con nosotros agendando una reunión en el calendario superior, utilizando el formulario de correo o vía WhatsApp al número +503 7821-0173.`;
+            response = `Puedes comunicarte con nosotros agendando una reunión en el calendario superior, utilizando el formulario de correo o vía WhatsApp al número +503 6161-2756.`;
         }
 
         setTimeout(() => appendMessage("bot", response), 500);
