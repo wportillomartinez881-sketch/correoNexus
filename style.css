@@ -70,7 +70,7 @@ body {
 .text-gold { color: var(--color-gold); }
 .border-gold-subtle { border-color: rgba(212, 175, 55, 0.3); }
 
-/* Estilos de los días del calendario */
+/* Calendario */
 .calendar-day {
     aspect-ratio: 1;
     display: flex;
@@ -91,7 +91,7 @@ body {
 .calendar-day.available:hover { background: rgba(16, 185, 129, 0.3); color: #ffffff; }
 .calendar-day.selected { background: #D4AF37 !important; color: #0f172a !important; font-weight: 700; border-color: #D4AF37; }
 
-/* Botones de horarios */
+/* Horarios */
 .time-slot-btn {
     padding: 0.5rem;
     background: rgba(30, 41, 59, 0.6);
