@@ -3,63 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus - Centro de Atención y Asistente</title>
+    <title>Centro de Atención Digital | Nexus</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Sección de Centro de Atención y Asistente Virtual -->
-    <section id="contacto" class="contact-section">
-        <div class="container">
-            <h2>Centro de Atención Digital</h2>
-            <p class="section-subtitle">Selecciona una de nuestras opciones de contacto o interactúa con nuestro asistente especializado en la fase 3 de servicios.</p>
+    <!-- Contenedor Principal del Centro de Atención -->
+    <div class="modal-center-container">
+        
+        <!-- Cabecera del Centro de Atención -->
+        <div class="modal-header">
+            <div class="header-title">
+                <span class="logo-icon">🌐</span>
+                <h3>Centro de Atención Digital | Nexus</h3>
+            </div>
+            <button class="close-modal-btn" onclick="cerrarCentroAtencion()">&times;</button>
+        </div>
+
+        <div class="modal-body-content">
+            <!-- Sección Superior: Calendario y Horarios -->
+            <div class="scheduling-grid">
+                <!-- Calendario Interactivo -->
+                <div class="calendar-card">
+                    <div class="calendar-header">
+                        <button onclick="cambiarMes(-1)">&lt;</button>
+                        <h4 id="mes-anio-titulo">Agosto 2026</h4>
+                        <button onclick="cambiarMes(1)">&gt;</button>
+                    </div>
+                    <div class="calendar-grid" id="calendar-days">
+                        <!-- Generado por JS -->
+                    </div>
+                    <div class="calendar-legend">
+                        <span><i class="dot available"></i> Disponible</span>
+                        <span><i class="dot unavailable"></i> No disponible</span>
+                        <span><i class="dot selected"></i> Seleccionado</span>
+                    </div>
+                </div>
+
+                <!-- Horarios Disponibles y Pestaña de Correo -->
+                <div class="schedule-panel">
+                    <h4>Horarios disponibles</h4>
+                    <p id="selected-date-text">Selecciona una fecha disponible en el calendario.</p>
+                    <div id="time-slots-container" class="time-slots-wrapper">
+                        <!-- Los horarios aparecen al seleccionar una fecha -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección Inferior: Dos Botones Interactivos con Descripción -->
+            <div class="action-buttons-grid">
+                <!-- Tarjeta 1: Contactar por correo -->
+                <div class="action-card">
+                    <div class="card-icon">✉️</div>
+                    <div class="card-text">
+                        <h4>Contactar por correo</h4>
+                        <p>Envíanos tu consulta detallada mediante nuestro formulario corporativo de correo electrónico y nuestro equipo te atenderá a la brevedad.</p>
+                    </div>
+                    <button class="btn-card-action" onclick="abrirVista('correo')">Ir al formulario de correo ↗</button>
+                </div>
+
+                <!-- Tarjeta 2: Asistente virtual -->
+                <div class="action-card">
+                    <div class="card-icon">🤖</div>
+                    <div class="card-text">
+                        <h4>Asistente virtual</h4>
+                        <p>Obtén información inmediata 24/7 sobre nuestros servicios, gestiones de planilla y asesoría mediante el asistente inteligente de Nexus.</p>
+                    </div>
+                    <button class="btn-card-action" onclick="abrirVista('chatbot')">Hablar con el asistente ↗</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vistas Flotantes Internas (Correo / Chatbot) -->
+    <div id="vista-overlay" class="vista-overlay hidden">
+        <div class="vista-modal-content">
+            <button class="close-vista-btn" onclick="cerrarVista()">&times;</button>
             
-            <!-- Botones interactivos con descripción -->
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <h3>💬 Asistente Virtual (Chatbot)</h3>
-                    <p>Consulta de forma inmediata sobre Planilla Única, Servicios Administrativos, Contables, Asesoría Empresarial y base legal aplicable en El Salvador.</p>
-                    <button class="btn-action" onclick="toggleChatbot()">Abrir Asistente</button>
-                </div>
-                
-                <div class="contact-card">
-                    <h3>📧 Formulario de Correo</h3>
-                    <p>Envíanos tus requerimientos detallados y nuestro equipo se pondrá en contacto contigo a la brevedad posible.</p>
-                    <a href="#formulario" class="btn-action">Escribir Mensaje</a>
-                </div>
+            <!-- Vista del Formulario de Correo -->
+            <div id="vista-correo" class="vista-panel hidden">
+                <h3>Formulario de Contacto - Nexus</h3>
+                <p>Escríbenos tus requerimientos de la fase 3 o de planilla.</p>
+                <form onsubmit="enviarCorreo(event)">
+                    <input type="text" placeholder="Tu Nombre o Empresa" required>
+                    <input type="email" placeholder="Correo electrónico" required>
+                    <textarea rows="4" placeholder="Escribe tu mensaje o consulta..." required></textarea>
+                    <button type="submit" class="btn-submit">Enviar Mensaje</button>
+                </form>
+            </div>
 
-                <div class="contact-card">
-                    <h3>📱 Soporte vía WhatsApp</h3>
-                    <p>Atención directa y personalizada para resolver dudas operativas urgentes sobre tus procesos empresariales.</p>
-                    <!-- Espacio listo para colocar el número definitivo mañana -->
-                    <a href="https://wa.me/503XXXXXXXX" target="_blank" class="btn-action whatsapp-btn">Abrir WhatsApp</a>
+            <!-- Vista del Chatbot Inteligente -->
+            <div id="vista-chatbot" class="vista-panel hidden">
+                <div class="chat-top">
+                    <h3>Asistente Virtual Nexus (Fase 3)</h3>
+                </div>
+                <div id="chat-messages" class="chat-messages-body">
+                    <div class="bot-msg">
+                        ¡Hola! Soy el asistente inteligente de Nexus. Estoy capacitado en la normativa de El Salvador (Código de Trabajo, ISSS, AFP, Código Tributario y de Comercio) y en nuestros servicios oficiales:
+                        <ul>
+                            <li><strong>Elaboración de Planilla Única:</strong> $64.24</li>
+                            <li><strong>Asesoría en Gestión de Planilla:</strong> $48.08</li>
+                            <li><strong>Configuración y Automatización:</strong> $110.27</li>
+                            <li><strong>Revisión y Corrección:</strong> $52.65</li>
+                            <li>Servicios Administrativos, Contables Básicos y Asesoría Empresarial.</li>
+                        </ul>
+                        ¿En qué te puedo colaborar hoy?
+                    </div>
+                </div>
+                <div class="chat-bottom">
+                    <input type="text" id="user-input" placeholder="Pregunta sobre servicios, precios o leyes...">
+                    <button onclick="sendMessage()">Enviar</button>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Interfaz del Chatbot -->
-    <div id="chatbot-container" class="chatbot-hidden">
-        <div class="chat-header">
-            <h4>Asistente Nexus (Fase 3)</h4>
-            <span onclick="toggleChatbot()" class="close-chat">&times;</span>
-        </div>
-        <div id="chat-messages" class="chat-body">
-            <div class="bot-message">
-                ¡Hola! Soy tu asistente virtual de Nexus. Estoy capacitado en la normativa de El Salvador (Código de Trabajo, ISSS, AFP, Código Tributario y de Comercio) y en nuestros servicios:
-                <ul>
-                    <li><strong>Elaboración de Planilla Única:</strong> $64.24</li>
-                    <li><strong>Asesoría en Gestión de Planilla:</strong> $48.08</li>
-                    <li><strong>Configuración y Automatización:</strong> $110.27</li>
-                    <li><strong>Revisión y Corrección:</strong> $52.65</li>
-                    <li>Servicios Administrativos, Contables y Asesoría Empresarial.</li>
-                </ul>
-                ¿En qué puedo ayudarte hoy?
-            </div>
-        </div>
-        <div class="chat-footer">
-            <input type="text" id="user-input" placeholder="Escribe tu consulta legal o de servicios...">
-            <button onclick="sendMessage()">Enviar</button>
         </div>
     </div>
 
