@@ -3,136 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centro de Atención Digital | Nexus Servicios Empresariales</title>
-    <!-- Google Fonts & FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Centro de Atención Digital | Nexus Servicios Empresariales, S.A. de C.V.</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="min-h-screen flex flex-col justify-between py-8 px-4 sm:px-6 lg:px-8">
+
+    <!-- Fondo Animado de Partículas -->
+    <div class="animated-bg" id="particles-container"></div>
 
     <!-- Header / Navbar -->
-    <header class="main-header">
-        <div class="container header-content">
-            <div class="logo-area">
-                <h1>NEXUS</h1>
-                <p class="slogan">Tu aliado estratégico en gestión empresarial.</p>
+    <header class="max-w-7xl mx-auto w-full mb-10 corporate-card px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 relative z-10">
+        <div class="flex items-center space-x-4">
+            <!-- Logo integrado -->
+            <img src="nexuslogosifondo.png" alt="Logo Nexus" class="h-12 w-auto object-contain">
+            <div>
+                <h1 class="text-xl font-extrabold tracking-tight text-white">NEXUS</h1>
+                <p class="text-xs text-gray-400">Tu aliado estratégico en gestión empresarial.</p>
             </div>
-            <div class="badge-system">
-                <span class="dot"></span> Sistema de Atención Digital
-            </div>
+        </div>
+        <div class="flex items-center space-x-2 bg-slate-800/80 border border-gold-subtle px-3 py-1.5 rounded-full">
+            <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></span>
+            <span class="text-xs font-medium text-gray-300">Centro de Atención Digital</span>
         </div>
     </header>
 
     <!-- Main Container -->
-    <main class="container main-container">
+    <main class="max-w-7xl mx-auto w-full relative z-10 space-y-12">
         
         <!-- Welcome Section -->
-        <section class="welcome-section">
-            <h2>Centro de Atención Digital Nexus</h2>
-            <p>Selecciona el medio de atención que prefieras. Nuestro equipo está preparado para ayudarte.</p>
+        <section class="text-center">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-3">Centro de Atención Digital</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
+                Selecciona el medio de atención que prefieras. Nuestro equipo está preparado para ayudarte con la gestión y consultoría de tu empresa.
+            </p>
         </section>
 
-        <!-- Cards Grid -->
-        <section class="cards-grid" id="mainCardsSection">
-            
-            <!-- Card 1: Agenda -->
-            <div class="service-card" id="cardAgenda">
-                <div class="card-icon"><i class="fa-solid fa-calendar-days"></i></div>
-                <h3>Solicitar una reunión</h3>
-                <p>Selecciona el día y horario que prefieras para solicitar una reunión con un asesor de Nexus.</p>
-                <button class="btn btn-primary" id="btnOpenAgenda">Agendar reunión</button>
+        <!-- SECCIÓN 1: CALENDARIO DE REUNIONES (Directo al ingresar) -->
+        <section class="corporate-card p-6 sm:p-8" id="agendaSection">
+            <div class="mb-6 border-b border-gold-subtle pb-4">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-calendar-days text-gold"></i> Agenda una reunión con Nexus
+                </h3>
+                <p class="text-sm text-gray-400 mt-1">Selecciona una fecha y horario disponible en el calendario, luego completa tus datos para solicitar la reunión.</p>
             </div>
 
-            <!-- Card 2: Email -->
-            <div class="service-card" id="cardEmail">
-                <div class="card-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
-                <h3>Contactar por correo</h3>
-                <p>Envíanos tu consulta mediante nuestro formulario de contacto y nuestro equipo podrá atender tu solicitud.</p>
-                <button class="btn btn-outline" id="btnEmailContact">Enviar consulta</button>
-            </div>
-
-            <!-- Card 3: Chatbot -->
-            <div class="service-card" id="cardChatbot">
-                <div class="card-icon"><i class="fa-solid fa-robot"></i></div>
-                <h3>Asistente virtual</h3>
-                <p>Obtén información inmediata sobre nuestros servicios mediante el asistente virtual de Nexus.</p>
-                <button class="btn btn-outline" id="btnChatbot">Hablar con Nexus</button>
-            </div>
-
-        </section>
-
-        <!-- AGENDA MODULE (Hidden by default) -->
-        <section class="agenda-section hidden" id="agendaSection">
-            <div class="back-nav">
-                <button class="btn-back" id="btnCloseAgenda"><i class="fa-solid fa-arrow-left"></i> Volver al Centro de Atención</button>
-            </div>
-            
-            <div class="agenda-header">
-                <h2>Agenda una reunión con Nexus</h2>
-                <p>Selecciona una fecha y horario disponible para solicitar una reunión con nuestro equipo.</p>
-            </div>
-
-            <div class="agenda-layout">
-                <!-- Calendar Component -->
-                <div class="calendar-card">
-                    <div class="calendar-nav">
-                        <button id="prevMonth"><i class="fa-solid fa-chevron-left"></i></button>
-                        <h3 id="monthYearDisplay">Mes Año</h3>
-                        <button id="nextMonth"><i class="fa-solid fa-chevron-right"></i></button>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Calendario Visual Mensual -->
+                <div class="lg:col-span-6 bg-slate-900/60 p-5 rounded-xl border border-white/10">
+                    <div class="flex justify-between items-center mb-4">
+                        <button id="prevMonth" class="p-2 rounded-lg bg-slate-800 text-gray-300 hover:text-white hover:bg-slate-700 transition"><i class="fa-solid fa-chevron-left"></i></button>
+                        <h4 id="monthYearDisplay" class="text-base font-semibold text-white">Mes Año</h4>
+                        <button id="nextMonth" class="p-2 rounded-lg bg-slate-800 text-gray-300 hover:text-white hover:bg-slate-700 transition"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                     
-                    <div class="weekdays-grid">
+                    <div class="grid grid-cols-7 text-center text-xs font-semibold text-gray-400 mb-2">
                         <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
                     </div>
 
-                    <div class="days-grid" id="daysGrid">
+                    <div class="grid grid-cols-7 gap-1.5" id="daysGrid">
                         <!-- Generado por JS -->
                     </div>
 
-                    <div class="calendar-legend">
-                        <div><span class="legend-dot available"></span> Disponible</div>
-                        <div><span class="legend-dot unavailable"></span> No disponible</div>
-                        <div><span class="legend-dot selected"></span> Seleccionado</div>
+                    <div class="flex justify-around mt-5 text-xs text-gray-400 pt-3 border-t border-white/10">
+                        <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-emerald-500 rounded-full"></span> Disponible</div>
+                        <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-slate-700 rounded-full"></span> No disponible</div>
+                        <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-amber-500 rounded-full"></span> Seleccionado</div>
                     </div>
                 </div>
 
-                <!-- Time & Form Panel -->
-                <div class="selection-panel">
-                    <!-- Time Slots -->
-                    <div class="time-slots-container" id="timeSlotsContainer">
-                        <h4>Horarios disponibles</h4>
-                        <p class="helper-text" id="timeHelperText">Selecciona una fecha en el calendario para ver los horarios.</p>
-                        <div class="slots-grid" id="slotsGrid">
+                <!-- Selección de Horarios y Formulario -->
+                <div class="lg:col-span-6 flex flex-col justify-between space-y-6">
+                    <!-- Horarios -->
+                    <div class="bg-slate-900/60 p-5 rounded-xl border border-white/10">
+                        <h4 class="text-sm font-semibold text-white mb-2">Horarios disponibles</h4>
+                        <p class="text-xs text-gray-400 mb-4" id="timeHelperText">Selecciona una fecha disponible en el calendario.</p>
+                        <div class="grid grid-cols-2 gap-3" id="slotsGrid">
                             <!-- Generado por JS -->
                         </div>
                     </div>
 
-                    <!-- Request Form -->
-                    <div class="request-form-container hidden" id="requestFormContainer">
-                        <h4>Detalles de la solicitud</h4>
-                        <form id="meetingForm">
-                            <div class="form-group">
-                                <label for="fullName">Nombre completo *</label>
-                                <input type="text" id="fullName" required placeholder="Ej. Ana María Gómez">
-                            </div>
-                            <div class="form-group">
-                                <label for="companyName">Nombre de la empresa *</label>
-                                <input type="text" id="companyName" required placeholder="Ej. Comercializadora del Sol, S.A.">
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="email">Correo electrónico *</label>
-                                    <input type="email" id="email" required placeholder="correo@empresa.com">
+                    <!-- Formulario de Reunión (Oculto hasta elegir hora) -->
+                    <div class="bg-slate-900/60 p-5 rounded-xl border border-white/10 hidden animate-fade-in" id="requestFormContainer">
+                        <h4 class="text-sm font-semibold text-white mb-3">Datos para la Solicitud</h4>
+                        <form id="meetingForm" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-300 mb-1">Nombre completo *</label>
+                                    <input type="text" id="fullName" required class="corporate-input w-full px-3 py-2 rounded-lg text-xs" placeholder="Ej. Ana Gómez">
                                 </div>
-                                <div class="form-group">
-                                    <label for="phone">Número de teléfono *</label>
-                                    <input type="tel" id="phone" required placeholder="7000-0000">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-300 mb-1">Empresa *</label>
+                                    <input type="text" id="companyName" required class="corporate-input w-full px-3 py-2 rounded-lg text-xs" placeholder="Ej. Comercializadora, S.A.">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="meetingReason">Motivo de la reunión *</label>
-                                <select id="meetingReason" required>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-300 mb-1">Correo electrónico *</label>
+                                    <input type="email" id="email" required class="corporate-input w-full px-3 py-2 rounded-lg text-xs" placeholder="correo@empresa.com">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-300 mb-1">Teléfono *</label>
+                                    <input type="tel" id="phone" required class="corporate-input w-full px-3 py-2 rounded-lg text-xs" placeholder="7000-0000">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-300 mb-1">Motivo de la reunión *</label>
+                                <select id="meetingReason" required class="corporate-input w-full px-3 py-2 rounded-lg text-xs bg-slate-800">
                                     <option value="" disabled selected>Selecciona un motivo</option>
                                     <option value="Información sobre servicios">Información sobre servicios</option>
                                     <option value="Gestión de Planilla Única">Gestión de Planilla Única</option>
@@ -141,50 +121,92 @@
                                     <option value="Otro">Otro</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary full-width" id="btnSubmitMeeting">Confirmar solicitud</button>
+                            <button type="submit" class="w-full py-2.5 px-4 rounded-lg text-xs font-semibold text-slate-900 bg-[#D4AF37] hover:bg-[#E5C158] transition shadow-md">
+                                Confirmar solicitud de reunión
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CONFIRMATION SCREEN (Hidden by default) -->
-        <section class="confirmation-section hidden" id="confirmationSection">
-            <div class="confirmation-card">
-                <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
-                <h2>¡Solicitud registrada correctamente!</h2>
-                <p class="conf-subtitle">Tu solicitud de reunión con Nexus ha sido registrada.</p>
-                
-                <div class="summary-box">
-                    <div class="summary-item"><i class="fa-solid fa-calendar"></i> <span>Fecha seleccionada:</span> <strong id="sumDate">-</strong></div>
-                    <div class="summary-item"><i class="fa-solid fa-clock"></i> <span>Hora seleccionada:</span> <strong id="sumTime">-</strong></div>
-                    <div class="summary-item"><i class="fa-solid fa-user"></i> <span>Nombre:</span> <strong id="sumName">-</strong></div>
-                    <div class="summary-item"><i class="fa-solid fa-building"></i> <span>Empresa:</span> <strong id="sumCompany">-</strong></div>
-                    <div class="summary-item"><i class="fa-solid fa-envelope"></i> <span>Correo:</span> <strong id="sumEmail">-</strong></div>
-                </div>
-
-                <p class="conf-notice">"Un representante de Nexus se pondrá en contacto contigo para confirmar la reunión."</p>
-                
-                <button class="btn btn-primary" id="btnBackHome">Volver al Centro de Atención</button>
+        <!-- PANTALLA DE CONFIRMACIÓN DE REUNIÓN (Oculta por defecto) -->
+        <section class="corporate-card p-8 text-center max-w-2xl mx-auto hidden" id="confirmationSection">
+            <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl border border-emerald-500/40">
+                <i class="fa-solid fa-circle-check"></i>
             </div>
+            <h3 class="text-2xl font-bold text-white mb-2">¡Solicitud registrada correctamente!</h3>
+            <p class="text-gray-400 text-sm mb-6">Tu solicitud de reunión con Nexus ha sido procesada con éxito.</p>
+            
+            <div class="bg-slate-900/60 rounded-xl p-5 text-left space-y-2 mb-6 border border-white/10 text-sm">
+                <div class="flex justify-between"><span class="text-gray-400">📅 Fecha:</span> <strong id="sumDate" class="text-white">-</strong></div>
+                <div class="flex justify-between"><span class="text-gray-400">🕐 Hora:</span> <strong id="sumTime" class="text-white">-</strong></div>
+                <div class="flex justify-between"><span class="text-gray-400">👤 Nombre:</span> <strong id="sumName" class="text-white">-</strong></div>
+                <div class="flex justify-between"><span class="text-gray-400">🏢 Empresa:</span> <strong id="sumCompany" class="text-white">-</strong></div>
+                <div class="flex justify-between"><span class="text-gray-400">📧 Correo:</span> <strong id="sumEmail" class="text-white">-</strong></div>
+            </div>
+
+            <p class="text-xs italic text-gray-400 mb-6">"Un representante de Nexus se pondrá en contacto contigo para confirmar la reunión."</p>
+            <button class="px-6 py-2.5 rounded-lg text-sm font-semibold text-slate-900 bg-[#D4AF37] hover:bg-[#E5C158] transition" id="btnBackHome">
+                Volver al Centro de Atención
+            </button>
         </section>
 
-        <!-- WhatsApp Banner -->
-        <section class="whatsapp-banner">
-            <div class="wa-text">
-                <h3>¿Necesitas atención inmediata?</h3>
-                <p>También puedes comunicarte directamente con un representante de Nexus.</p>
+        <!-- SECCIÓN 2: OTRAS TARJETAS (Correo y Asistente Virtual) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Tarjeta 2: Contactar por Correo (Enlazada a tu repositorio de formulario) -->
+            <div class="corporate-card p-6 sm:p-8 flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-slate-800/80 border border-gold-subtle flex items-center justify-center text-gold text-xl mb-4">
+                        <i class="fa-solid fa-envelope-open-text"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Contactar por correo</h3>
+                    <p class="text-sm text-gray-400 mb-6 leading-relaxed">
+                        Envíanos tu consulta detallada mediante nuestro formulario corporativo de correo electrónico y nuestro equipo la atenderá a la brevedad.
+                    </p>
+                </div>
+                <a href="AQUI_COLOCARE_LA_URL" id="btnEmailContact" target="_blank" class="w-full py-3 px-4 rounded-lg text-sm font-semibold text-center text-white bg-slate-800 hover:bg-slate-700 border border-gold-subtle transition flex items-center justify-center gap-2">
+                    <span>Ir al formulario de correo</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </a>
             </div>
-            <button class="btn btn-whatsapp" id="btnWhatsApp">
-                <i class="fa-brands fa-whatsapp"></i> Contactar por WhatsApp
+
+            <!-- Tarjeta 3: Asistente Virtual -->
+            <div class="corporate-card p-6 sm:p-8 flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-slate-800/80 border border-gold-subtle flex items-center justify-center text-gold text-xl mb-4">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Asistente virtual</h3>
+                    <p class="text-sm text-gray-400 mb-6 leading-relaxed">
+                        Obtén información inmediata 24/7 sobre nuestros servicios, gestiones de planilla y asesorías mediante el asistente inteligente de Nexus.
+                    </p>
+                </div>
+                <a href="AQUI_COLOCARE_LA_URL" id="btnChatbot" target="_blank" class="w-full py-3 px-4 rounded-lg text-sm font-semibold text-center text-white bg-slate-800 hover:bg-slate-700 border border-gold-subtle transition flex items-center justify-center gap-2">
+                    <span>Hablar con el asistente</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Banner de WhatsApp -->
+        <section class="corporate-card p-6 sm:p-8 flex flex-col sm:flex-row justify-between items-center gap-6 bg-gradient-to-r from-slate-900/90 to-indigo-950/90">
+            <div>
+                <h3 class="text-lg font-bold text-white mb-1">¿Necesitas atención inmediata?</h3>
+                <p class="text-sm text-gray-400">Comunícate directamente vía WhatsApp con un representante de Nexus.</p>
+            </div>
+            <button id="btnWhatsApp" class="px-6 py-3 rounded-lg text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-500 transition flex items-center gap-2 shadow-lg shadow-emerald-900/30 shrink-0">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Contactar por WhatsApp
             </button>
         </section>
 
     </main>
 
     <!-- Footer -->
-    <footer class="main-footer-bottom">
-        <p>&copy; 2026 Nexus Servicios Empresariales, S.A. de C.V. Todos los derechos reservados.</p>
+    <footer class="max-w-7xl mx-auto w-full text-center py-6 text-xs text-gray-500 border-t border-white/10 mt-12">
+        &copy; 2026 Nexus Servicios Empresariales, S.A. de C.V. Todos los derechos reservados.
     </footer>
 
     <script src="script.js"></script>
