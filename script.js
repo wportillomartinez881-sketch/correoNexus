@@ -1,14 +1,6 @@
-const WHATSAPP_NUMBER = "50361612756"; // Número actualizado correctamente
 const GOOGLE_APPS_SCRIPT_URL = "AQUI_GOOGLE_APPS_SCRIPT_URL";
 
 document.addEventListener("DOMContentLoaded", () => {
-
-    // --- 0. CONFIGURACIÓN ENLACE WHATSAPP ---
-    const whatsappBtn = document.getElementById("whatsappBtn");
-    if (whatsappBtn) {
-        const defaultMsg = encodeURIComponent("Hola, me interesa obtener más información sobre los servicios y tarifas de Nexus.");
-        whatsappBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${defaultMsg}`;
-    }
 
     // --- 1. PARTÍCULAS ANIMADAS ---
     const particlesContainer = document.getElementById('particles-container');
@@ -234,8 +226,8 @@ document.addEventListener("DOMContentLoaded", () => {
             response = "Nuestros módulos y tarifas oficiales son:\n• Módulo I (Planilla Única Base): $64.24\n• Módulo II (Asesoría Contable): $48.08\n• Módulo III (Gestión Corporativa): $110.27\n• Módulo IV (Consultoría Directa): $52.65";
         } else if (q.includes("planilla") || q.includes("isss") || q.includes("afp")) {
             response = "El Módulo I de Planilla Única ($64.24) consiste en el cálculo automatizado y seguro de ISSS, AFP y retenciones de ley para empresas.";
-        } else if (q.includes("contacto") || q.includes("contactar") || q.includes("whatsapp")) {
-            response = `Puedes comunicarte con nosotros agendando una reunión en el calendario superior, utilizando el formulario de correo o vía WhatsApp al número +503 6161-2756.`;
+        } else if (q.includes("contacto") || q.includes("contactar")) {
+            response = "Puedes comunicarte con nosotros agendando una reunión en el calendario superior o utilizando el formulario de correo electrónico.";
         }
 
         setTimeout(() => appendMessage("bot", response), 500);
