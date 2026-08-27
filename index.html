@@ -16,9 +16,8 @@
     <div class="animated-bg" id="particles-container"></div>
 
     <!-- Header / Navbar -->
-    <header class="max-w-7xl mx-auto w-full mb-10 corporate-card px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 relative z-10">
+    <header class="max-w-7xl mx-auto w-full mb-8 corporate-card px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 relative z-10">
         <div class="flex items-center space-x-4">
-            <!-- Tu logotipo integrado -->
             <img src="nexuslogosifondo.png" alt="Logo Nexus" class="h-12 w-auto object-contain">
             <div>
                 <h1 class="text-xl font-extrabold tracking-tight text-white">NEXUS</h1>
@@ -32,92 +31,17 @@
     </header>
 
     <!-- Main Container -->
-    <main class="max-w-7xl mx-auto w-full relative z-10 space-y-12">
+    <main class="max-w-5xl mx-auto w-full relative z-10 space-y-8">
         
-        <!-- Welcome Section -->
+        <!-- Welcome Section (Título y breve descripción) -->
         <section class="text-center">
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-3">Centro de Atención Digital</h2>
-            <p class="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
-                Selecciona el medio de atención que prefieras. Nuestro equipo está preparado para ayudarte con la gestión y consultoría de tu empresa.
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-2">Centro de Atención Digital</h2>
+            <p class="text-gray-400 max-w-xl mx-auto text-sm">
+                Plataforma centralizada para gestionar tus citas, consultas de servicios y comunicación directa con Nexus.
             </p>
         </section>
 
-        <!-- MÓDULOS DE PRECIOS OFICIALES -->
-        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Módulo 1 -->
-            <div class="corporate-card p-5 flex flex-col justify-between text-center relative overflow-hidden group">
-                <div class="absolute top-0 right-0 bg-gold/10 text-gold text-[10px] font-bold px-3 py-1 rounded-bl-xl border-l border-b border-gold-subtle">Módulo I</div>
-                <div>
-                    <div class="w-10 h-10 rounded-full bg-slate-800 border border-gold-subtle flex items-center justify-center text-gold mx-auto mb-3">
-                        <i class="fa-solid fa-file-invoice-dollar text-sm"></i>
-                    </div>
-                    <h4 class="text-sm font-bold text-white mb-1">Planilla Única Base</h4>
-                    <p class="text-xs text-gray-400 mb-4">Cálculo automatizado de ISSS, AFP y retenciones de ley.</p>
-                </div>
-                <div>
-                    <div class="text-xl font-extrabold text-gold mb-3">$64.24</div>
-                    <button onclick="document.getElementById('meetingReason').value='Gestión de Planilla Única'; location.href='#agendaSection';" class="w-full py-2 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-gray-200 border border-gold-subtle transition">
-                        Seleccionar Módulo
-                    </button>
-                </div>
-            </div>
-
-            <!-- Módulo 2 -->
-            <div class="corporate-card p-5 flex flex-col justify-between text-center relative overflow-hidden group">
-                <div class="absolute top-0 right-0 bg-gold/10 text-gold text-[10px] font-bold px-3 py-1 rounded-bl-xl border-l border-b border-gold-subtle">Módulo II</div>
-                <div>
-                    <div class="w-10 h-10 rounded-full bg-slate-800 border border-gold-subtle flex items-center justify-center text-gold mx-auto mb-3">
-                        <i class="fa-solid fa-calculator text-sm"></i>
-                    </div>
-                    <h4 class="text-sm font-bold text-white mb-1">Asesoría Contable</h4>
-                    <p class="text-xs text-gray-400 mb-4">Revisión fiscal y estados financieros mensuales.</p>
-                </div>
-                <div>
-                    <div class="text-xl font-extrabold text-gold mb-3">$48.08</div>
-                    <button onclick="document.getElementById('meetingReason').value='Asesoría empresarial'; location.href='#agendaSection';" class="w-full py-2 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-gray-200 border border-gold-subtle transition">
-                        Seleccionar Módulo
-                    </button>
-                </div>
-            </div>
-
-            <!-- Módulo 3 -->
-            <div class="corporate-card p-5 flex flex-col justify-between text-center relative overflow-hidden group">
-                <div class="absolute top-0 right-0 bg-gold/10 text-gold text-[10px] font-bold px-3 py-1 rounded-bl-xl border-l border-b border-gold-subtle">Módulo III</div>
-                <div>
-                    <div class="w-10 h-10 rounded-full bg-slate-800 border border-gold-subtle flex items-center justify-center text-gold mx-auto mb-3">
-                        <i class="fa-solid fa-building-shield text-sm"></i>
-                    </div>
-                    <h4 class="text-sm font-bold text-white mb-1">Gestión Corporativa</h4>
-                    <p class="text-xs text-gray-400 mb-4">Trámites mercantiles, alcaldías y carteras legales.</p>
-                </div>
-                <div>
-                    <div class="text-xl font-extrabold text-gold mb-3">$110.27</div>
-                    <button onclick="document.getElementById('meetingReason').value='Información sobre servicios'; location.href='#agendaSection';" class="w-full py-2 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-gray-200 border border-gold-subtle transition">
-                        Seleccionar Módulo
-                    </button>
-                </div>
-            </div>
-
-            <!-- Módulo 4 -->
-            <div class="corporate-card p-5 flex flex-col justify-between text-center relative overflow-hidden group">
-                <div class="absolute top-0 right-0 bg-gold/10 text-gold text-[10px] font-bold px-3 py-1 rounded-bl-xl border-l border-b border-gold-subtle">Módulo IV</div>
-                <div>
-                    <div class="w-10 h-10 rounded-full bg-slate-800 border border-gold-subtle flex items-center justify-center text-gold mx-auto mb-3">
-                        <i class="fa-solid fa-headset text-sm"></i>
-                    </div>
-                    <h4 class="text-sm font-bold text-white mb-1">Consultoría Directa</h4>
-                    <p class="text-xs text-gray-400 mb-4">Sesión estratégica personalizada con expertos.</p>
-                </div>
-                <div>
-                    <div class="text-xl font-extrabold text-gold mb-3">$52.65</div>
-                    <button onclick="document.getElementById('meetingReason').value='Cotización'; location.href='#agendaSection';" class="w-full py-2 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-gray-200 border border-gold-subtle transition">
-                        Seleccionar Módulo
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN 1: CALENDARIO DE REUNIONES -->
+        <!-- BLOQUE 1: CALENDARIO DE REUNIONES (Cuadro grande superior) -->
         <section class="corporate-card p-6 sm:p-8" id="agendaSection">
             <div class="mb-6 border-b border-gold-subtle pb-4">
                 <h3 class="text-xl font-bold text-white flex items-center gap-2">
@@ -221,129 +145,140 @@
             </button>
         </section>
 
-        <!-- SECCIÓN 2: FORMULARIO DE CORREO CORPORATIVO -->
-        <section class="corporate-card p-6 sm:p-8" id="emailSection">
-            <div class="mb-6 border-b border-gold-subtle pb-4">
-                <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-envelope-open-text text-gold"></i> Contactar por correo electrónico
-                </h3>
-                <p class="text-sm text-gray-400 mt-1">Envíanos tus requerimientos corporativos directamente mediante este formulario.</p>
-            </div>
-
-            <form id="contact-form" class="space-y-6">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-2">Nombre completo *</label>
-                        <input type="text" id="nombreCorreo" required class="corporate-input w-full px-4 py-3 rounded-lg text-sm" placeholder="Ej. Carlos Mendoza">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-2">Empresa *</label>
-                        <input type="text" id="empresaCorreo" required class="corporate-input w-full px-4 py-3 rounded-lg text-sm" placeholder="Ej. Nexus S.A. de C.V.">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-2">Correo electrónico *</label>
-                        <input type="email" id="emailCorreo" required class="corporate-input w-full px-4 py-3 rounded-lg text-sm" placeholder="carlos@empresa.com">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-2">Número de teléfono *</label>
-                        <input type="tel" id="telefonoCorreo" required class="corporate-input w-full px-4 py-3 rounded-lg text-sm" placeholder="7000-0000">
-                    </div>
-                </div>
-
+        <!-- GRILLA INFERIOR: DOS CUADROS (IZQUIERDA Y DERECHA) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- BLOQUE 2: CONTACTAR POR CORREO ELECTRÓNICO (Izquierda) -->
+            <section class="corporate-card p-6 sm:p-8 flex flex-col justify-between" id="emailCardSection">
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">Asunto *</label>
-                    <input type="text" id="asuntoCorreo" required class="corporate-input w-full px-4 py-3 rounded-lg text-sm" placeholder="Ej. Solicitud de propuesta comercial">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2 mb-2">
+                        <i class="fa-solid fa-envelope-open-text text-gold"></i> Contactar por correo electrónico
+                    </h3>
+                    <p class="text-sm text-gray-400 mb-6">
+                        Envíanos tus requerimientos corporativos, dudas sobre tarifas o propuestas comerciales de forma directa mediante nuestro formulario digital.
+                    </p>
                 </div>
-
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">Mensaje *</label>
-                    <textarea id="mensajeCorreo" rows="4" required class="corporate-input w-full px-4 py-3 rounded-lg text-sm resize-none" placeholder="Describe los requerimientos de tu proyecto..."></textarea>
+                    <button id="btnOpenEmailModal" class="w-full py-3 px-4 rounded-lg text-xs font-semibold text-slate-900 bg-[#D4AF37] hover:bg-[#E5C158] transition flex items-center justify-center gap-2 shadow-md">
+                        <i class="fa-solid fa-paper-plane"></i> Abrir formulario de correo
+                    </button>
                 </div>
+            </section>
 
-                <button type="submit" id="submit-email-btn" class="w-full py-3.5 px-6 rounded-lg text-sm font-semibold text-gray-900 bg-[#D4AF37] hover:bg-[#E5C158] transition-all duration-300 shadow-lg flex items-center justify-center space-x-2">
-                    <span>Enviar Mensaje por Correo</span>
-                    <i class="fa-solid fa-paper-plane text-xs"></i>
-                </button>
-                
-                <p id="form-status" class="text-xs text-center mt-2 hidden"></p>
-            </form>
-        </section>
-
-        <!-- SECCIÓN 3: ASISTENTE VIRTUAL INTERACTIVO -->
-        <section class="corporate-card p-6 sm:p-8" id="chatbotSection">
-            <div class="mb-6 border-b border-gold-subtle pb-4 flex justify-between items-center flex-wrap gap-4">
+            <!-- BLOQUE 3: ASISTENTE VIRTUAL NEXUS (Derecha) -->
+            <section class="corporate-card p-6 sm:p-8 flex flex-col justify-between" id="chatbotCardSection">
                 <div>
-                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2 mb-2">
                         <i class="fa-solid fa-robot text-gold"></i> Asistente Virtual Nexus
                     </h3>
-                    <p class="text-sm text-gray-400 mt-1">Obtén respuestas inmediatas sobre nuestros servicios, tarifas y Planilla Única.</p>
+                    <p class="text-sm text-gray-400 mb-6">
+                        Bot inteligente programado para resolver dudas frecuentes sobre quiénes somos, servicios disponibles, precios y métodos de contacto.
+                    </p>
                 </div>
-                <span class="bg-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full border border-emerald-500/30">En línea 24/7</span>
-            </div>
+                <div>
+                    <button id="btnOpenChatModal" class="w-full py-3 px-4 rounded-lg text-xs font-semibold text-slate-900 bg-[#D4AF37] hover:bg-[#E5C158] transition flex items-center justify-center gap-2 shadow-md">
+                        <i class="fa-solid fa-comments"></i> Abrir chat de Nexus
+                    </button>
+                </div>
+            </section>
 
-            <div class="bg-slate-900/80 rounded-xl p-4 border border-white/10 h-64 overflow-y-auto space-y-3 mb-4 text-sm" id="chatMessages">
-                <div class="flex items-start gap-3">
-                    <div class="w-8 h-8 rounded-full bg-slate-800 border border-gold-subtle flex items-center justify-center text-gold shrink-0"><i class="fa-solid fa-robot text-xs"></i></div>
-                    <div class="bg-slate-800 p-3 rounded-xl text-gray-200 max-w-lg border border-white/5">
-                        ¡Hola! Soy el asistente virtual de Nexus Servicios Empresariales, S.A. de C.V. ¿En qué puedo ayudarte hoy? Selecciona una opción rápida o escribe tu consulta:
+        </div>
+
+        <!-- MODAL / PANTALLA INTERNA DE CORREO -->
+        <div id="emailModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 hidden">
+            <div class="corporate-card p-6 sm:p-8 max-w-xl w-full max-h-[90vh] overflow-y-auto relative animate-fade-in">
+                <button id="btnCloseEmailModal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+                <h3 class="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                    <i class="fa-solid fa-envelope-open-text text-gold"></i> Enviar Correo a Nexus
+                </h3>
+                <p class="text-xs text-gray-400 mb-6">Completa los campos para procesar tu mensaje.</p>
+
+                <form id="contact-form" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-300 mb-1">Nombre completo *</label>
+                            <input type="text" id="nombreCorreo" required class="corporate-input w-full px-3 py-2 rounded-lg text-xs" placeholder="Ej. Carlos Mendoza">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-300 mb-1">Empresa *</label>
+                            <input type="text" id="empresaCorreo" required class="corporate-input w-full px-3 py-2 rounded-lg text-xs" placeholder="Ej. Nexus S.A. de C.V.">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-300 mb-1">Correo electrónico *</label>
+                            <input type="email" id="emailCorreo" required class="corporate-input w-full px-3 py-2 rounded-lg text-xs" placeholder="carlos@empresa.com">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-300 mb-1">Teléfono *</label>
+                            <input type="tel" id="telefonoCorreo" required class="corporate-input w-full px-3 py-2 rounded-lg text-xs" placeholder="7000-0000">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Asunto *</label>
+                        <input type="text" id="asuntoCorreo" required class="corporate-input w-full px-3 py-2 rounded-lg text-xs" placeholder="Ej. Solicitud de propuesta comercial">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Mensaje *</label>
+                        <textarea id="mensajeCorreo" rows="3" required class="corporate-input w-full px-3 py-2 rounded-lg text-xs resize-none" placeholder="Describe los requerimientos de tu proyecto..."></textarea>
+                    </div>
+                    <button type="submit" id="submit-email-btn" class="w-full py-2.5 px-4 rounded-lg text-xs font-semibold text-slate-900 bg-[#D4AF37] hover:bg-[#E5C158] transition shadow-md">
+                        Enviar Mensaje por Correo
+                    </button>
+                    <p id="form-status" class="text-xs text-center mt-2 hidden"></p>
+                </form>
+            </div>
+        </div>
+
+        <!-- MODAL / PANTALLA INTERNA DEL ASISTENTE VIRTUAL (CHAT) -->
+        <div id="chatModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 hidden">
+            <div class="corporate-card p-6 sm:p-8 max-w-xl w-full max-h-[90vh] flex flex-col relative animate-fade-in">
+                <button id="btnCloseChatModal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+                <div class="mb-4">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-robot text-gold"></i> Asistente Virtual Nexus
+                    </h3>
+                    <p class="text-xs text-gray-400">Pregúntame sobre qué es Nexus, nuestros servicios, precios o cómo contactarnos.</p>
+                </div>
+
+                <div class="bg-slate-900/80 rounded-xl p-3 border border-white/10 h-64 overflow-y-auto space-y-3 mb-4 text-xs" id="chatMessages">
+                    <div class="flex items-start gap-2">
+                        <div class="w-7 h-7 rounded-full bg-slate-800 border border-gold-subtle flex items-center justify-center text-gold shrink-0"><i class="fa-solid fa-robot text-[10px]"></i></div>
+                        <div class="bg-slate-800 p-2.5 rounded-xl text-gray-200 border border-white/5">
+                            ¡Hola! Soy el asistente virtual de Nexus Servicios Empresariales, S.A. de C.V. ¿Qué deseas saber sobre nuestros servicios o tarifas?
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Opciones rápidas de preguntas frecuentes con descripción/botones interactivos -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 mb-4">
-                <button type="button" class="faq-btn text-left p-2.5 rounded-lg bg-slate-800 hover:bg-slate-700/80 border border-gold-subtle transition group">
-                    <div class="text-xs font-bold text-gold group-hover:text-white flex items-center justify-between">
-                        ¿Qué es la Planilla Única? <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                    </div>
-                    <div class="text-[11px] text-gray-400 mt-0.5">Automatización ISSS y AFP</div>
-                </button>
-                <button type="button" class="faq-btn text-left p-2.5 rounded-lg bg-slate-800 hover:bg-slate-700/80 border border-gold-subtle transition group" data-question="¿Cuáles son los precios de los módulos?">
-                    <div class="text-xs font-bold text-gold group-hover:text-white flex items-center justify-between">
-                        Precios y Módulos <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                    </div>
-                    <div class="text-[11px] text-gray-400 mt-0.5">Consulta tarifas oficiales</div>
-                </button>
-                <button type="button" class="faq-btn text-left p-2.5 rounded-lg bg-slate-800 hover:bg-slate-700/80 border border-gold-subtle transition group" data-question="¿Cuáles son los horarios de atención?">
-                    <div class="text-xs font-bold text-gold group-hover:text-white flex items-center justify-between">
-                        Horarios corporativos <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                    </div>
-                    <div class="text-[11px] text-gray-400 mt-0.5">Lunes a Viernes</div>
-                </button>
-                <button type="button" class="faq-btn text-left p-2.5 rounded-lg bg-slate-800 hover:bg-slate-700/80 border border-gold-subtle transition group" data-question="¿Cómo agendo una asesoría?">
-                    <div class="text-xs font-bold text-gold group-hover:text-white flex items-center justify-between">
-                        Agendar asesoría <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                    </div>
-                    <div class="text-[11px] text-gray-400 mt-0.5">Calendario de reuniones</div>
-                </button>
-            </div>
+                <!-- Preguntas rápidas precargadas con la información de precios y servicios -->
+                <div class="grid grid-cols-2 gap-2 mb-3">
+                    <button type="button" class="faq-btn text-left p-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-gold-subtle transition text-[11px] text-gold font-medium">
+                        ¿Qué es Nexus y qué servicios ofrece?
+                    </button>
+                    <button type="button" class="faq-btn text-left p-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-gold-subtle transition text-[11px] text-gold font-medium">
+                        ¿Cuáles son los precios de los módulos?
+                    </button>
+                    <button type="button" class="faq-btn text-left p-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-gold-subtle transition text-[11px] text-gold font-medium">
+                        ¿En qué consiste la Planilla Única?
+                    </button>
+                    <button type="button" class="faq-btn text-left p-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-gold-subtle transition text-[11px] text-gold font-medium">
+                        ¿Cómo puedo contactarlos?
+                    </button>
+                </div>
 
-            <form id="chatForm" class="flex gap-2">
-                <input type="text" id="chatInput" placeholder="Escribe tu consulta al asistente..." class="corporate-input flex-1 px-4 py-2.5 rounded-lg text-sm">
-                <button type="submit" class="px-5 py-2.5 rounded-lg text-sm font-semibold text-gray-900 bg-[#D4AF37] hover:bg-[#E5C158] transition">
-                    <i class="fa-solid fa-paper-plane"></i>
-                </button>
-            </form>
-        </section>
-
-        <!-- Banner de WhatsApp -->
-        <section class="corporate-card p-6 sm:p-8 flex flex-col sm:flex-row justify-between items-center gap-6 bg-gradient-to-r from-slate-900/90 to-indigo-950/90">
-            <div>
-                <h3 class="text-lg font-bold text-white mb-1">¿Necesitas atención inmediata?</h3>
-                <p class="text-sm text-gray-400">Comunícate directamente vía WhatsApp con un representante de Nexus.</p>
+                <form id="chatForm" class="flex gap-2">
+                    <input type="text" id="chatInput" placeholder="Escribe tu consulta..." class="corporate-input flex-1 px-3 py-2 rounded-lg text-xs">
+                    <button type="submit" class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-900 bg-[#D4AF37] hover:bg-[#E5C158] transition">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
             </div>
-            <button id="btnWhatsApp" class="px-6 py-3 rounded-lg text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-500 transition flex items-center gap-2 shadow-lg shadow-emerald-900/30 shrink-0">
-                <i class="fa-brands fa-whatsapp text-lg"></i> Contactar por WhatsApp
-            </button>
-        </section>
+        </div>
 
     </main>
 
     <!-- Footer -->
-    <footer class="max-w-7xl mx-auto w-full text-center py-6 text-xs text-gray-500 border-t border-white/10 mt-12">
+    <footer class="max-w-5xl mx-auto w-full text-center py-6 text-xs text-gray-500 border-t border-white/10 mt-12">
         &copy; 2026 Nexus Servicios Empresariales, S.A. de C.V. Todos los derechos reservados.
     </footer>
 
